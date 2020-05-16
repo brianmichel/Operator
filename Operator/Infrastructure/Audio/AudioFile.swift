@@ -21,14 +21,13 @@ extension FourCharCode {
         var code: FourCharCode = 0
         // Value has to consist of 4 printable ASCII characters, e.g. '420v'.
         // Note: This implementation does not enforce printable range (32-126)
-        if value.count == 4 && value.utf8.count == 4 {
+        if value.count == 4, value.utf8.count == 4 {
             for byte in value.utf8 {
                 code = code << 8 + FourCharCode(byte)
             }
-        }
-        else {
-            print("FourCharCode: Can't initialize with '\(value)', only printable ASCII allowed. Setting to '????'.")
-            code = 0x3F3F3F3F // = '????'
+        } else {
+            Log.warn("FourCharCode: Can't initialize with '\(value)', only printable ASCII allowed. Setting to '????'.")
+            code = 0x3F3F_3F3F // = '????'
         }
         self = code
     }
@@ -46,14 +45,14 @@ final class AudioFile {
 
         let status = AudioFileCountUserData(fileId, code, &itemCount)
 
-        guard status == noErr else  {
+        guard status == noErr else {
             return 0
         }
 
         var size: UInt32 = 0
         AudioFileGetUserDataSize(fileId, code, 0, &size)
 
-        guard let data: UnsafeMutablePointer<UInt8> = get(userDataPointer: code, index: 0, inputSize: size) else  {
+        guard let data: UnsafeMutablePointer<UInt8> = get(userDataPointer: code, index: 0, inputSize: size) else {
             return 0
         }
         defer {
@@ -64,13 +63,13 @@ final class AudioFile {
         let string: String? = String(cString: data)
         // Determine if we've reached the OP-1 JSON, and if so advance 4 bytes and strip control characters.
         if let almostJSON = string, almostJSON.starts(with: "op-1") {
-            let strippedString = almostJSON[4..<almostJSON.count].trimmingCharacters(in: .controlCharacters)
+            let strippedString = almostJSON[4 ..< almostJSON.count].trimmingCharacters(in: .controlCharacters)
 
             do {
                 let parsed = try JSONSerialization.jsonObject(with: strippedString.data(using: .utf8)!)
-                print("Parsed: \(parsed)")
-            } catch(let error) {
-                print("Error Parsing String - \(error)")
+                Log.debug("Parsed: \(parsed)")
+            } catch {
+                Log.error("Error Parsing String - \(error)")
             }
         }
 
@@ -90,7 +89,7 @@ final class AudioFile {
 
         let status = AudioFileOpenURL(url as CFURL, .readPermission, kAudioFileAIFFType, &audioFile)
 
-        print("status: \(status)")
+        Log.debug("status: \(status)")
 
         if let file = audioFile {
             fileId = file
@@ -98,7 +97,7 @@ final class AudioFile {
             return nil
         }
 
-        print("Data count: \(self.userDataCount)")
+        Log.debug("Data count: \(userDataCount)")
     }
 
     func get<T>(userData code: FourCharCode, index: UInt32, inputSize: UInt32 = UInt32(MemoryLayout<T>.size)) -> T? {
@@ -115,7 +114,7 @@ final class AudioFile {
                                           &size,
                                           propertyData)
 
-        if status == noErr && size > 0 {
+        if status == noErr, size > 0 {
             return propertyData[0]
         }
 
@@ -132,7 +131,7 @@ final class AudioFile {
                                           &size,
                                           propertyData)
 
-        if status == noErr && size > 0 {
+        if status == noErr, size > 0 {
             return propertyData
         }
 
@@ -168,9 +167,9 @@ final class AudioFile {
                                           &size,
                                           propertyData)
 
-        print("Got status \(status) when looking for property \(property)")
+        Log.debug("Got status \(status) when looking for property \(property)")
 
-        if status == noErr && size > 0 {
+        if status == noErr, size > 0 {
             return propertyData.pointee
         }
 
