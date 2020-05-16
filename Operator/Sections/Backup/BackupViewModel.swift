@@ -11,9 +11,11 @@ import Foundation
 import UIKit
 
 final class BackupViewModel: ObservableObject {
-    @Published var showDocumentPicker = false
-    @Published var inputURL: URL?
-    @Published var destinationURL: URL?
+    var showDocumentPicker = false
+    var inputURL: URL?
+
+    var destinationURL: URL?
+    var destinationURLAvailable: Bool = false
 
     let inputPicker = DocumentPicker()
     let destinationPicker = DocumentPicker()
@@ -50,6 +52,20 @@ final class BackupViewModel: ObservableObject {
     private func backupInputSelected(input: URL) {
         let compressor = FolderCompressor(inputDirectory: input,
                                           outputDirectory: URL(fileURLWithPath: NSTemporaryDirectory()))
-        let compressedURL = compressor.compress()
+
+        compressor.compress()
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case let .failure(error):
+                    Log.error("There was an error compressing your backup: \(error)")
+                case .finished:
+                    break
+                }
+            }, receiveValue: { compressedURL in
+                self.destinationURL = compressedURL
+                self.destinationURLAvailable = true
+                Log.debug("Successfully compressed and moved backup to - \(compressedURL)")
+            }).store(in: &storage)
     }
 }

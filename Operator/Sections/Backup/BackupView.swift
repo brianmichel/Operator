@@ -27,7 +27,10 @@ struct BackupView: View {
                     self.viewModel.inputPicker
                 #endif
             })
-        }
+        }.alert(isPresented: $viewModel.destinationURLAvailable, content: {
+            Alert(title: Text("Backup Created"),
+                  message: Text("Backup has been created at \(String(describing: self.viewModel.destinationURL))"))
+        })
     }
 
     private func showMacDialog(for picker: DocumentPicker, animated: Bool = true) {
