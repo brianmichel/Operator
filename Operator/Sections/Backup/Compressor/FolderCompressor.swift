@@ -10,6 +10,10 @@ import Compression
 import Foundation
 import ZIPFoundation
 
+struct FolderCompressorError: Error {
+    let message: String
+}
+
 final class FolderCompressor {
     private let inputDirectory: URL
     private let outputFileName: String
@@ -35,9 +39,12 @@ final class FolderCompressor {
 
     func compress() -> URL? {
         do {
-            Log.debug("Attempting to begin archive creation..\nInput: \(inputDirectory.absoluteString)\nDestination: \(destinationPath.absoluteString)")
+            Log.debug("Attempting to begin archive creation...\nInput: \(inputDirectory.absoluteString)\nDestination: \(destinationPath.absoluteString)")
             try createArchive(from: inputDirectory, to: destinationPath)
+            Log.debug("Successfully created zip archive into temporary folder \(destinationPath)")
             try compressArchive(from: destinationPath, to: compressedArchivePath)
+
+            try moveArchiveToDocuments(from: compressedArchivePath, fileName: "\(outputFileName)\(algorithm.rawValue.pathExtension)")
 
             return compressedArchivePath
         } catch {
@@ -47,9 +54,33 @@ final class FolderCompressor {
         return nil
     }
 
+    private func moveArchiveToDocuments(from: URL, fileName _: String) throws {
+        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+        let documentsDirectory = paths[0]
+
+        let docURL = URL(fileURLWithPath: documentsDirectory)
+        let toFileURL = docURL.appendingPathComponent(outputFileName)
+
+        let fileManager = FileManager.default
+
+        try fileManager.moveItem(at: from, to: toFileURL)
+    }
+
     private func createArchive(from directory: URL, to location: URL) throws {
-        let manager = FileManager()
-        try manager.zipItem(at: directory, to: location, shouldKeepParent: false)
+        guard directory.startAccessingSecurityScopedResource() else {
+            throw FolderCompressorError(message: "Unable to acquire security scope access to directory \(directory)")
+        }
+        defer { directory.stopAccessingSecurityScopedResource() }
+
+        var error: NSError?
+        NSFileCoordinator().coordinate(readingItemAt: directory, options: .resolvesSymbolicLink, error: &error) { url in
+            do {
+                let manager = FileManager()
+                try manager.zipItem(at: url, to: location, shouldKeepParent: false)
+            } catch let zipError {
+                Log.error("Error trying to zip \(url) - \(zipError)")
+            }
+        }
     }
 
     private func compressArchive(from archive: URL, to compressedArchive: URL) throws {
@@ -66,7 +97,6 @@ final class FolderCompressor {
                                                 sourceFileHandle: sourceHandle,
                                                 destinationFileHandle: destinationHandle,
                                                 algorithm: algorithm.rawValue) { updatedProgress in
-
                 Log.debug("Progress compressing file \(archive) - \(updatedProgress)")
             }
         } else {

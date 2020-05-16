@@ -9,25 +9,31 @@
 import SwiftUI
 
 struct BackupView: View {
-    @ObservedObject var viewModel = BackupViewModel()
+    @ObservedObject private var viewModel = BackupViewModel()
     @State var showDocumentPicker = false
 
     var body: some View {
         VStack {
             Button(action: {
-                self.viewModel.pickFilePath()
                 self.showDocumentPicker.toggle()
+                self.viewModel.pickFilePath()
                 #if targetEnvironment(macCatalyst)
-                    UIApplication.shared.windows[0].rootViewController?.present(self.viewModel.picker.viewController, animated: true)
+                    self.showMacDialog(for: self.viewModel.inputPicker)
                 #endif
-            }) {
+            }, label: {
                 Text("Choose Directory")
-            }.sheet(isPresented: $showDocumentPicker, content: {
+            }).sheet(isPresented: $showDocumentPicker, content: {
                 #if os(iOS)
-                    self.viewModel.picker
+                    self.viewModel.inputPicker
                 #endif
             })
         }
+    }
+
+    private func showMacDialog(for picker: DocumentPicker, animated: Bool = true) {
+        #if targetEnvironment(macCatalyst)
+            UIApplication.shared.windows[0].rootViewController?.present(picker.viewController, animated: animated)
+        #endif
     }
 }
 
