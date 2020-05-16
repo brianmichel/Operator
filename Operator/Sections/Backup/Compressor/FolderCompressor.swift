@@ -6,12 +6,18 @@
 //  Copyright © 2020 Brian Michel. All rights reserved.
 //
 
+import Combine
 import Compression
-import Foundation
 import ZIPFoundation
 
 struct FolderCompressorError: Error {
     let message: String
+}
+
+enum CompressionError: Error {
+    case unableToFindParameters
+    case compressionFailed(error: Error)
+    case unableToMoveArchive
 }
 
 final class FolderCompressor {
@@ -19,6 +25,8 @@ final class FolderCompressor {
     private let outputFileName: String
 
     private let algorithm: Algorithm
+
+    private let queue = DispatchQueue(label: "me.foureyes.Operator.folder-compressor")
 
     lazy var destinationPath: URL = {
         URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("\(outputFileName).zip")
@@ -37,33 +45,50 @@ final class FolderCompressor {
         self.algorithm = algorithm
     }
 
-    func compress() -> URL? {
-        do {
-            Log.debug("Attempting to begin archive creation...\nInput: \(inputDirectory.absoluteString)\nDestination: \(destinationPath.absoluteString)")
-            try createArchive(from: inputDirectory, to: destinationPath)
-            Log.debug("Successfully created zip archive into temporary folder \(destinationPath)")
-            try compressArchive(from: destinationPath, to: compressedArchivePath)
+    func compress() -> Future<URL, CompressionError> {
+        let future = Future<URL, CompressionError> { [weak self] promise in
+            guard let strongSelf = self,
+                let queue = self?.queue,
+                let inputDirectory = self?.inputDirectory,
+                let destinationPath = self?.destinationPath,
+                let outputFileName = self?.outputFileName,
+                let compressedArchivePath = self?.compressedArchivePath,
+                let algorithm = self?.algorithm else {
+                promise(.failure(.unableToFindParameters))
+                return
+            }
+            queue.async {
+                do {
+                    Log.debug("Attempting to begin archive creation...\nInput: \(inputDirectory.absoluteString)\nDestination: \(destinationPath.absoluteString)")
+                    try strongSelf.createArchive(from: inputDirectory, to: destinationPath)
+                    Log.debug("Successfully created zip archive into temporary folder \(destinationPath)")
+                    try strongSelf.compressArchive(from: destinationPath, to: compressedArchivePath)
 
-            try moveArchiveToDocuments(from: compressedArchivePath, fileName: "\(outputFileName)\(algorithm.rawValue.pathExtension)")
-
-            return compressedArchivePath
-        } catch {
-            Log.error("There was an error attempting to compress archive: \(error)")
+                    Log.debug("Trying to move archive into place...")
+                    let archiveURL = try strongSelf.moveArchiveToDocuments(from: compressedArchivePath, fileName: "\(outputFileName)\(algorithm.rawValue.pathExtension)")
+                    promise(.success(archiveURL))
+                } catch {
+                    Log.error("There was an error attempting to compress archive: \(error)")
+                    promise(.failure(.compressionFailed(error: error)))
+                }
+            }
         }
 
-        return nil
+        return future
     }
 
-    private func moveArchiveToDocuments(from: URL, fileName _: String) throws {
+    private func moveArchiveToDocuments(from: URL, fileName _: String) throws -> URL {
         let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
         let documentsDirectory = paths[0]
 
         let docURL = URL(fileURLWithPath: documentsDirectory)
         let toFileURL = docURL.appendingPathComponent(outputFileName)
 
-        let fileManager = FileManager.default
+        let fileManager = FileManager()
 
         try fileManager.moveItem(at: from, to: toFileURL)
+
+        return toFileURL
     }
 
     private func createArchive(from directory: URL, to location: URL) throws {
