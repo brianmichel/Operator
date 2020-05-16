@@ -184,8 +184,8 @@
 		72704C692460EF10006F3E99 /* Operator */ = {
 			isa = PBXGroup;
 			children = (
-				726A21F424701C9D00DBAB87 /* Sections */,
 				72704C832460EF94006F3E99 /* Infrastructure */,
+				726A21F424701C9D00DBAB87 /* Sections */,
 				72704C7F2460EF4A006F3E99 /* Resources */,
 				72704C722460EF13006F3E99 /* Preview Content */,
 			);

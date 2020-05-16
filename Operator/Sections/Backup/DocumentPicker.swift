@@ -10,6 +10,8 @@ import SwiftUI
 import UIKit
 
 final class DocumentPicker: NSObject, UIViewControllerRepresentable {
+    @Published var selectedURLs = [URL]()
+
     typealias UIViewControllerType = UIDocumentPickerViewController
 
     lazy var viewController: UIDocumentPickerViewController = {
@@ -33,9 +35,7 @@ extension DocumentPicker: UIDocumentPickerDelegate {
     func documentPicker(_: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         Log.debug(String(describing: urls))
 
-        let compressor = FolderCompressor(inputDirectory: urls[0],
-                                          outputDirectory: URL(fileURLWithPath: NSTemporaryDirectory()))
-        compressor.compress()
+        selectedURLs = urls
     }
 
     func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
