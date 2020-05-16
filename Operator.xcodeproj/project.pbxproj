@@ -3,11 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		72352439246D006D00F58C61 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72352438246D006D00F58C61 /* String+Extensions.swift */; };
+		726A21F124701C4800DBAB87 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726A21F024701C4800DBAB87 /* Log.swift */; };
+		726A21F324701C5D00DBAB87 /* LogFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726A21F224701C5D00DBAB87 /* LogFormatter.swift */; };
 		72704C6B2460EF10006F3E99 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72704C6A2460EF10006F3E99 /* AppDelegate.swift */; };
 		72704C6D2460EF10006F3E99 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72704C6C2460EF10006F3E99 /* SceneDelegate.swift */; };
 		72704C6F2460EF10006F3E99 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72704C6E2460EF10006F3E99 /* ContentView.swift */; };
@@ -37,6 +39,8 @@
 		6761102642A44577E3E6499D /* Pods-Operator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Operator.debug.xcconfig"; path = "Target Support Files/Pods-Operator/Pods-Operator.debug.xcconfig"; sourceTree = "<group>"; };
 		722F0F2B246CE18800C857E9 /* sample-modified.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sample-modified.aif"; sourceTree = "<group>"; };
 		72352438246D006D00F58C61 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
+		726A21F024701C4800DBAB87 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
+		726A21F224701C5D00DBAB87 /* LogFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogFormatter.swift; sourceTree = "<group>"; };
 		72704C672460EF10006F3E99 /* Operator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Operator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72704C6A2460EF10006F3E99 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		72704C6C2460EF10006F3E99 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -90,6 +94,25 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		726A21EF24701C2A00DBAB87 /* Logging */ = {
+			isa = PBXGroup;
+			children = (
+				726A21F024701C4800DBAB87 /* Log.swift */,
+				726A21F224701C5D00DBAB87 /* LogFormatter.swift */,
+			);
+			path = Logging;
+			sourceTree = "<group>";
+		};
+		726A21F424701C9D00DBAB87 /* Sections */ = {
+			isa = PBXGroup;
+			children = (
+				72704C6A2460EF10006F3E99 /* AppDelegate.swift */,
+				72704C6C2460EF10006F3E99 /* SceneDelegate.swift */,
+				72704C6E2460EF10006F3E99 /* ContentView.swift */,
+			);
+			path = Sections;
+			sourceTree = "<group>";
+		};
 		72704C5E2460EF10006F3E99 = {
 			isa = PBXGroup;
 			children = (
@@ -113,13 +136,9 @@
 		72704C692460EF10006F3E99 /* Operator */ = {
 			isa = PBXGroup;
 			children = (
+				726A21F424701C9D00DBAB87 /* Sections */,
 				72704C832460EF94006F3E99 /* Infrastructure */,
 				72704C7F2460EF4A006F3E99 /* Resources */,
-				72704C6A2460EF10006F3E99 /* AppDelegate.swift */,
-				72704C6C2460EF10006F3E99 /* SceneDelegate.swift */,
-				72704C6E2460EF10006F3E99 /* ContentView.swift */,
-				72704C702460EF13006F3E99 /* Assets.xcassets */,
-				72704C752460EF13006F3E99 /* LaunchScreen.storyboard */,
 				72704C722460EF13006F3E99 /* Preview Content */,
 			);
 			path = Operator;
@@ -139,6 +158,8 @@
 				72704C802460EF59006F3E99 /* Test Sound Files */,
 				72704C782460EF13006F3E99 /* Info.plist */,
 				72704C7E2460EF41006F3E99 /* Operator.entitlements */,
+				72704C702460EF13006F3E99 /* Assets.xcassets */,
+				72704C752460EF13006F3E99 /* LaunchScreen.storyboard */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -154,6 +175,7 @@
 		72704C832460EF94006F3E99 /* Infrastructure */ = {
 			isa = PBXGroup;
 			children = (
+				726A21EF24701C2A00DBAB87 /* Logging */,
 				72352437246D006200F58C61 /* Extensions */,
 				72704C842460EF9E006F3E99 /* Audio */,
 			);
@@ -193,7 +215,6 @@
 				6761102642A44577E3E6499D /* Pods-Operator.debug.xcconfig */,
 				32F8E8113014F8384AD3C0D6 /* Pods-Operator.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -209,6 +230,8 @@
 				72704C642460EF10006F3E99 /* Frameworks */,
 				72704C652460EF10006F3E99 /* Resources */,
 				411B10740FB47AEB4D78E934 /* [CP] Embed Pods Frameworks */,
+				726A21F5247023F900DBAB87 /* Run SwiftFormat */,
+				726A21F62470242300DBAB87 /* Run SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -338,6 +361,42 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		726A21F5247023F900DBAB87 /* Run SwiftFormat */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run SwiftFormat";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "git diff HEAD --name-only --diff-filter=ACMRTU -- \"Operator/*.swift\" | while read filename; do\n${SRCROOT}/Pods/SwiftFormat/CommandLineTool/swiftformat \"$filename\";\ndone\n";
+		};
+		726A21F62470242300DBAB87 /* Run SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run SwiftLint";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "git diff HEAD --name-only --diff-filter=ACMRTU -- \"Operator/*.swift\" | while read filename; do\n${PODS_ROOT}/SwiftLint/swiftlint lint --path \"$filename\";\ndone\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -347,6 +406,8 @@
 			files = (
 				72352439246D006D00F58C61 /* String+Extensions.swift in Sources */,
 				72704C862460EFB7006F3E99 /* AudioFile.swift in Sources */,
+				726A21F124701C4800DBAB87 /* Log.swift in Sources */,
+				726A21F324701C5D00DBAB87 /* LogFormatter.swift in Sources */,
 				72704C6B2460EF10006F3E99 /* AppDelegate.swift in Sources */,
 				72704C6D2460EF10006F3E99 /* SceneDelegate.swift in Sources */,
 				72704C6F2460EF10006F3E99 /* ContentView.swift in Sources */,
