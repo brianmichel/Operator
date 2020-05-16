@@ -4,23 +4,27 @@ PODS:
     - CocoaLumberjack/Core
   - SwiftFormat/CLI (0.40.14)
   - SwiftLint (0.39.2)
+  - ZIPFoundation (0.9.11)
 
 DEPENDENCIES:
   - CocoaLumberjack/Swift
   - SwiftFormat/CLI (~> 0.40.9)
   - SwiftLint
+  - ZIPFoundation (~> 0.9)
 
 SPEC REPOS:
   trunk:
     - CocoaLumberjack
     - SwiftFormat
     - SwiftLint
+    - ZIPFoundation
 
 SPEC CHECKSUMS:
   CocoaLumberjack: b17ae15142558d08bbacf69775fa10c4abbebcc9
   SwiftFormat: 21c9c3c748d5fcece493d8610eee23df15393458
   SwiftLint: 22ccbbe3b8008684be5955693bab135e0ed6a447
+  ZIPFoundation: b1f0de4eed33e74a676f76e12559ab6b75990197
 
-PODFILE CHECKSUM: 91615cd58cfe464e3bfe800a55accb1a5587dd12
+PODFILE CHECKSUM: 0f8159756714f44752da20cebe39708c816b810d
 
 COCOAPODS: 1.9.1
