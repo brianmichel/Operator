@@ -10,6 +10,8 @@
 		72352439246D006D00F58C61 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72352438246D006D00F58C61 /* String+Extensions.swift */; };
 		726A21F124701C4800DBAB87 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726A21F024701C4800DBAB87 /* Log.swift */; };
 		726A21F324701C5D00DBAB87 /* LogFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726A21F224701C5D00DBAB87 /* LogFormatter.swift */; };
+		726A21F92470260A00DBAB87 /* DeviceLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726A21F82470260A00DBAB87 /* DeviceLocator.swift */; };
+		726A21FB24702E3C00DBAB87 /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726A21FA24702E3C00DBAB87 /* Application.swift */; };
 		72704C6B2460EF10006F3E99 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72704C6A2460EF10006F3E99 /* AppDelegate.swift */; };
 		72704C6D2460EF10006F3E99 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72704C6C2460EF10006F3E99 /* SceneDelegate.swift */; };
 		72704C6F2460EF10006F3E99 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72704C6E2460EF10006F3E99 /* ContentView.swift */; };
@@ -41,6 +43,8 @@
 		72352438246D006D00F58C61 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		726A21F024701C4800DBAB87 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		726A21F224701C5D00DBAB87 /* LogFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogFormatter.swift; sourceTree = "<group>"; };
+		726A21F82470260A00DBAB87 /* DeviceLocator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceLocator.swift; sourceTree = "<group>"; };
+		726A21FA24702E3C00DBAB87 /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
 		72704C672460EF10006F3E99 /* Operator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Operator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72704C6A2460EF10006F3E99 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		72704C6C2460EF10006F3E99 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -109,8 +113,17 @@
 				72704C6A2460EF10006F3E99 /* AppDelegate.swift */,
 				72704C6C2460EF10006F3E99 /* SceneDelegate.swift */,
 				72704C6E2460EF10006F3E99 /* ContentView.swift */,
+				726A21FA24702E3C00DBAB87 /* Application.swift */,
 			);
 			path = Sections;
+			sourceTree = "<group>";
+		};
+		726A21F7247025F300DBAB87 /* USB */ = {
+			isa = PBXGroup;
+			children = (
+				726A21F82470260A00DBAB87 /* DeviceLocator.swift */,
+			);
+			path = USB;
 			sourceTree = "<group>";
 		};
 		72704C5E2460EF10006F3E99 = {
@@ -175,6 +188,7 @@
 		72704C832460EF94006F3E99 /* Infrastructure */ = {
 			isa = PBXGroup;
 			children = (
+				726A21F7247025F300DBAB87 /* USB */,
 				726A21EF24701C2A00DBAB87 /* Logging */,
 				72352437246D006200F58C61 /* Extensions */,
 				72704C842460EF9E006F3E99 /* Audio */,
@@ -411,6 +425,8 @@
 				72704C6B2460EF10006F3E99 /* AppDelegate.swift in Sources */,
 				72704C6D2460EF10006F3E99 /* SceneDelegate.swift in Sources */,
 				72704C6F2460EF10006F3E99 /* ContentView.swift in Sources */,
+				726A21FB24702E3C00DBAB87 /* Application.swift in Sources */,
+				726A21F92470260A00DBAB87 /* DeviceLocator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
