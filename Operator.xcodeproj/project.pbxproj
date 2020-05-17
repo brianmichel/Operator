@@ -39,6 +39,10 @@
 		72CBCD672471B6D2003D0476 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72CBCD662471B6D2003D0476 /* WelcomeView.swift */; };
 		72CBCD692471C497003D0476 /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72CBCD682471C496003D0476 /* URL+Extensions.swift */; };
 		72CBCD6B2471C52C003D0476 /* URLTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72CBCD6A2471C52C003D0476 /* URLTests.swift */; };
+		72CBCD6E2471CEE0003D0476 /* DrumUtilityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72CBCD6D2471CEE0003D0476 /* DrumUtilityView.swift */; };
+		72CBCD702471D2B2003D0476 /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72CBCD6F2471D2B1003D0476 /* KeyboardView.swift */; };
+		72CBCD722471D77C003D0476 /* KeyboardHalfKeyButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72CBCD712471D77C003D0476 /* KeyboardHalfKeyButtonStyle.swift */; };
+		72CBCD742471E402003D0476 /* KeyboardWholeKeyButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72CBCD732471E402003D0476 /* KeyboardWholeKeyButtonStyle.swift */; };
 		72F291062470523A00561B16 /* FolderCompressor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F291052470523A00561B16 /* FolderCompressor.swift */; };
 		72F291082470561100561B16 /* FileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F291072470561100561B16 /* FileHelper.swift */; };
 		72F2910B2470569E00561B16 /* Compressor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F2910A2470569E00561B16 /* Compressor.swift */; };
@@ -95,6 +99,10 @@
 		72CBCD662471B6D2003D0476 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		72CBCD682471C496003D0476 /* URL+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extensions.swift"; sourceTree = "<group>"; };
 		72CBCD6A2471C52C003D0476 /* URLTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLTests.swift; sourceTree = "<group>"; };
+		72CBCD6D2471CEE0003D0476 /* DrumUtilityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrumUtilityView.swift; sourceTree = "<group>"; };
+		72CBCD6F2471D2B1003D0476 /* KeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
+		72CBCD712471D77C003D0476 /* KeyboardHalfKeyButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHalfKeyButtonStyle.swift; sourceTree = "<group>"; };
+		72CBCD732471E402003D0476 /* KeyboardWholeKeyButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardWholeKeyButtonStyle.swift; sourceTree = "<group>"; };
 		72F291052470523A00561B16 /* FolderCompressor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderCompressor.swift; sourceTree = "<group>"; };
 		72F291072470561100561B16 /* FileHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileHelper.swift; sourceTree = "<group>"; };
 		72F2910A2470569E00561B16 /* Compressor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Compressor.swift; sourceTree = "<group>"; };
@@ -151,8 +159,9 @@
 		726A21F424701C9D00DBAB87 /* Sections */ = {
 			isa = PBXGroup;
 			children = (
+				72CBCD6C2471CECA003D0476 /* Drum Utility */,
 				726A21FD2470434A00DBAB87 /* Home */,
-				726A21FC2470431D00DBAB87 /* Backup */,
+				726A21FC2470431D00DBAB87 /* Backup & Restore */,
 				72704C6A2460EF10006F3E99 /* AppDelegate.swift */,
 				72704C6C2460EF10006F3E99 /* SceneDelegate.swift */,
 			);
@@ -167,7 +176,7 @@
 			path = USB;
 			sourceTree = "<group>";
 		};
-		726A21FC2470431D00DBAB87 /* Backup */ = {
+		726A21FC2470431D00DBAB87 /* Backup & Restore */ = {
 			isa = PBXGroup;
 			children = (
 				72F291092470569000561B16 /* Compressor */,
@@ -175,7 +184,7 @@
 				726A2200247043A400DBAB87 /* BackupView.swift */,
 				72C77F48247048B6003907E7 /* DocumentPicker.swift */,
 			);
-			path = Backup;
+			path = "Backup & Restore";
 			sourceTree = "<group>";
 		};
 		726A21FD2470434A00DBAB87 /* Home */ = {
@@ -307,6 +316,17 @@
 				72B7556224717EAE00FA8B3B /* CircleBullet.swift */,
 			);
 			path = UI;
+			sourceTree = "<group>";
+		};
+		72CBCD6C2471CECA003D0476 /* Drum Utility */ = {
+			isa = PBXGroup;
+			children = (
+				72CBCD6D2471CEE0003D0476 /* DrumUtilityView.swift */,
+				72CBCD6F2471D2B1003D0476 /* KeyboardView.swift */,
+				72CBCD712471D77C003D0476 /* KeyboardHalfKeyButtonStyle.swift */,
+				72CBCD732471E402003D0476 /* KeyboardWholeKeyButtonStyle.swift */,
+			);
+			path = "Drum Utility";
 			sourceTree = "<group>";
 		};
 		72F291092470569000561B16 /* Compressor */ = {
@@ -526,6 +546,7 @@
 				72F291082470561100561B16 /* FileHelper.swift in Sources */,
 				72C77F49247048B6003907E7 /* DocumentPicker.swift in Sources */,
 				72B75561247174D100FA8B3B /* BulletedVStack.swift in Sources */,
+				72CBCD6E2471CEE0003D0476 /* DrumUtilityView.swift in Sources */,
 				726A21F124701C4800DBAB87 /* Log.swift in Sources */,
 				726A21F324701C5D00DBAB87 /* LogFormatter.swift in Sources */,
 				72BDC2A62470BEB000361464 /* AppleButtonStyle.swift in Sources */,
@@ -536,11 +557,14 @@
 				72CBCD652471B46C003D0476 /* BackupInProgressView.swift in Sources */,
 				72BDC2A42470BE1100361464 /* NeumorphicButtonStyle.swift in Sources */,
 				72BDC2A82470C2A000361464 /* UIColor+Extensions.swift in Sources */,
+				72CBCD742471E402003D0476 /* KeyboardWholeKeyButtonStyle.swift in Sources */,
 				72B7556324717EAE00FA8B3B /* CircleBullet.swift in Sources */,
 				72CBCD692471C497003D0476 /* URL+Extensions.swift in Sources */,
+				72CBCD722471D77C003D0476 /* KeyboardHalfKeyButtonStyle.swift in Sources */,
 				72F2910B2470569E00561B16 /* Compressor.swift in Sources */,
 				726A21F92470260A00DBAB87 /* DeviceLocator.swift in Sources */,
 				72CBCD632471B416003D0476 /* KnobView.swift in Sources */,
+				72CBCD702471D2B2003D0476 /* KeyboardView.swift in Sources */,
 				72B75566247195EC00FA8B3B /* KnobsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

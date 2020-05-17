@@ -26,6 +26,10 @@ struct HomeView: View {
                         Image(systemName: "doc.on.doc.fill").padding(.trailing, 5)
                         Text("Backup & Restore")
                     }
+                    NavigationLink(destination: DrumUtilityView()) {
+                        Image(systemName: "music.note.list").padding(.trailing, 5)
+                        Text("Drum Utility")
+                    }
                 }
             }.navigationBarTitle(Text("Operator")).listStyle(GroupedListStyle())
                 .environment(\.horizontalSizeClass, .regular)
