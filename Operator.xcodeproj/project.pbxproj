@@ -26,6 +26,12 @@
 		729E6FE6246CE2AC0015B30D /* sample-modified.aif in Resources */ = {isa = PBXBuildFile; fileRef = 722F0F2B246CE18800C857E9 /* sample-modified.aif */; };
 		729E6FE7246CE2AF0015B30D /* sample-adjusted.aif in Resources */ = {isa = PBXBuildFile; fileRef = 72704C962460F099006F3E99 /* sample-adjusted.aif */; };
 		72A22CDD247058A700978DE6 /* Compression_Algorithm+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A22CDC247058A700978DE6 /* Compression_Algorithm+Extensions.swift */; };
+		72B75561247174D100FA8B3B /* BulletedVStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B75560247174D100FA8B3B /* BulletedVStack.swift */; };
+		72B7556324717EAE00FA8B3B /* CircleBullet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B7556224717EAE00FA8B3B /* CircleBullet.swift */; };
+		72BDC2A42470BE1100361464 /* NeumorphicButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BDC2A32470BE1100361464 /* NeumorphicButtonStyle.swift */; };
+		72BDC2A62470BEB000361464 /* AppleButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BDC2A52470BEB000361464 /* AppleButtonStyle.swift */; };
+		72BDC2A82470C2A000361464 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BDC2A72470C2A000361464 /* UIColor+Extensions.swift */; };
+		72BDC2AA2470C2BB00361464 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BDC2A92470C2BB00361464 /* Colors.swift */; };
 		72C77F49247048B6003907E7 /* DocumentPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C77F48247048B6003907E7 /* DocumentPicker.swift */; };
 		72F291062470523A00561B16 /* FolderCompressor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F291052470523A00561B16 /* FolderCompressor.swift */; };
 		72F291082470561100561B16 /* FileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F291072470561100561B16 /* FileHelper.swift */; };
@@ -70,6 +76,12 @@
 		72704C8F2460EFEB006F3E99 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		72704C962460F099006F3E99 /* sample-adjusted.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sample-adjusted.aif"; sourceTree = "<group>"; };
 		72A22CDC247058A700978DE6 /* Compression_Algorithm+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Compression_Algorithm+Extensions.swift"; sourceTree = "<group>"; };
+		72B75560247174D100FA8B3B /* BulletedVStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletedVStack.swift; sourceTree = "<group>"; };
+		72B7556224717EAE00FA8B3B /* CircleBullet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleBullet.swift; sourceTree = "<group>"; };
+		72BDC2A32470BE1100361464 /* NeumorphicButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeumorphicButtonStyle.swift; sourceTree = "<group>"; };
+		72BDC2A52470BEB000361464 /* AppleButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleButtonStyle.swift; sourceTree = "<group>"; };
+		72BDC2A72470C2A000361464 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
+		72BDC2A92470C2BB00361464 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		72C77F48247048B6003907E7 /* DocumentPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPicker.swift; sourceTree = "<group>"; };
 		72F291052470523A00561B16 /* FolderCompressor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderCompressor.swift; sourceTree = "<group>"; };
 		72F291072470561100561B16 /* FileHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileHelper.swift; sourceTree = "<group>"; };
@@ -109,6 +121,7 @@
 			children = (
 				72352438246D006D00F58C61 /* String+Extensions.swift */,
 				72A22CDC247058A700978DE6 /* Compression_Algorithm+Extensions.swift */,
+				72BDC2A72470C2A000361464 /* UIColor+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -223,6 +236,7 @@
 		72704C832460EF94006F3E99 /* Infrastructure */ = {
 			isa = PBXGroup;
 			children = (
+				72BDC2A22470BE0000361464 /* UI */,
 				726A21F7247025F300DBAB87 /* USB */,
 				726A21EF24701C2A00DBAB87 /* Logging */,
 				72352437246D006200F58C61 /* Extensions */,
@@ -256,6 +270,18 @@
 				72704C962460F099006F3E99 /* sample-adjusted.aif */,
 			);
 			path = "Test Files";
+			sourceTree = "<group>";
+		};
+		72BDC2A22470BE0000361464 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				72BDC2A32470BE1100361464 /* NeumorphicButtonStyle.swift */,
+				72BDC2A52470BEB000361464 /* AppleButtonStyle.swift */,
+				72BDC2A92470C2BB00361464 /* Colors.swift */,
+				72B75560247174D100FA8B3B /* BulletedVStack.swift */,
+				72B7556224717EAE00FA8B3B /* CircleBullet.swift */,
+			);
+			path = UI;
 			sourceTree = "<group>";
 		};
 		72F291092470569000561B16 /* Compressor */ = {
@@ -464,6 +490,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				726A2201247043A400DBAB87 /* BackupView.swift in Sources */,
+				72BDC2AA2470C2BB00361464 /* Colors.swift in Sources */,
 				72352439246D006D00F58C61 /* String+Extensions.swift in Sources */,
 				72F291062470523A00561B16 /* FolderCompressor.swift in Sources */,
 				72704C862460EFB7006F3E99 /* AudioFile.swift in Sources */,
@@ -471,12 +498,17 @@
 				726A21FF2470439800DBAB87 /* BackupViewModel.swift in Sources */,
 				72F291082470561100561B16 /* FileHelper.swift in Sources */,
 				72C77F49247048B6003907E7 /* DocumentPicker.swift in Sources */,
+				72B75561247174D100FA8B3B /* BulletedVStack.swift in Sources */,
 				726A21F124701C4800DBAB87 /* Log.swift in Sources */,
 				726A21F324701C5D00DBAB87 /* LogFormatter.swift in Sources */,
+				72BDC2A62470BEB000361464 /* AppleButtonStyle.swift in Sources */,
 				72704C6B2460EF10006F3E99 /* AppDelegate.swift in Sources */,
 				72704C6D2460EF10006F3E99 /* SceneDelegate.swift in Sources */,
 				72704C6F2460EF10006F3E99 /* HomeView.swift in Sources */,
 				726A21FB24702E3C00DBAB87 /* Application.swift in Sources */,
+				72BDC2A42470BE1100361464 /* NeumorphicButtonStyle.swift in Sources */,
+				72BDC2A82470C2A000361464 /* UIColor+Extensions.swift in Sources */,
+				72B7556324717EAE00FA8B3B /* CircleBullet.swift in Sources */,
 				72F2910B2470569E00561B16 /* Compressor.swift in Sources */,
 				726A21F92470260A00DBAB87 /* DeviceLocator.swift in Sources */,
 			);
