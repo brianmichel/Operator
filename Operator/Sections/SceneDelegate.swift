@@ -19,6 +19,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
+            #if targetEnvironment(macCatalyst)
+                windowScene.sizeRestrictions?.minimumSize = CGSize(width: 800, height: 800)
+            #endif
             let window = UIWindow(windowScene: windowScene)
             window.rootViewController = ApplicationHostingController(rootView: HomeView())
             self.window = window
