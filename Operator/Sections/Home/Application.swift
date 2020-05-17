@@ -12,4 +12,12 @@ final class ApplicationHostingController: UIHostingController<HomeView> {
     #if targetEnvironment(macCatalyst)
         let usbDeviceLocator = USBDeviceLocator()
     #endif
+
+    override var shouldAutorotate: Bool {
+        if traitCollection.userInterfaceIdiom == .phone {
+            return false
+        }
+
+        return true
+    }
 }

@@ -9,7 +9,7 @@
 import SwiftUI
 
 enum MyDeviceNames: String, CaseIterable {
-    case mac = "Mac"
+    case iPadPro = "iPad Pro (12.9-inch) (4th generation)"
     case iPhone11ProMax = "iPhone 11 Pro Max"
 
     static var all: [String] {
@@ -23,10 +23,13 @@ struct HomeView: View {
             List {
                 Section {
                     NavigationLink(destination: BackupView()) {
+                        Image(systemName: "doc.on.doc.fill").padding(.trailing, 5)
                         Text("Back Your Device Up")
                     }
                 }
-            }.listStyle(GroupedListStyle()).navigationBarTitle(Text("Operator"))
+            }.navigationBarTitle(Text("Operator")).listStyle(GroupedListStyle())
+                .environment(\.horizontalSizeClass, .regular)
+                .environment(\.horizontalSizeClass, .compact)
         }
     }
 }
