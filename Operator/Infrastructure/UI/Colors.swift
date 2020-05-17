@@ -6,6 +6,7 @@
 //  Copyright © 2020 Brian Michel. All rights reserved.
 //
 
+import SwiftUI
 import UIKit
 
 enum Colors {
@@ -14,4 +15,10 @@ enum Colors {
     static let op1Green = UIColor(hex: "3BCA7A")!
     static let op1White = UIColor(hex: "FDFAFC")!
     static let op1Orange = UIColor(hex: "F0633F")!
+}
+
+extension UIColor {
+    func asColor() -> Color {
+        return Color(self)
+    }
 }

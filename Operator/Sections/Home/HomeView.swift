@@ -24,13 +24,14 @@ struct HomeView: View {
                 Section {
                     NavigationLink(destination: BackupView()) {
                         Image(systemName: "doc.on.doc.fill").padding(.trailing, 5)
-                        Text("Back Your Device Up")
+                        Text("Backup & Restore")
                     }
                 }
             }.navigationBarTitle(Text("Operator")).listStyle(GroupedListStyle())
                 .environment(\.horizontalSizeClass, .regular)
                 .environment(\.horizontalSizeClass, .compact)
-        }
+            WelcomeView()
+        }.navigationViewStyle(DoubleColumnNavigationViewStyle())
     }
 }
 
