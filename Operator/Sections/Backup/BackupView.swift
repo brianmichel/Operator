@@ -52,16 +52,18 @@ struct BackupView: View {
                         #endif
                     })
             }
-        }.padding(viewPadding).navigationBarTitle("Backup & Restore".localized(comment: "Navigation title for Backup & Restore screen.")).alert(isPresented: $viewModel.backupCompleted) {
-            Alert(title: Text("Backup Completed"),
-                  message: Text("Your backup is complete, would you like to view the file?"),
-                  primaryButton: .default(Text("View".localized(comment: "Label for button to show user the backed up file.")), action: {
-                      if let url = self.viewModel.destinationURL?.enclosingFolderURL() {
-                          UIApplication.shared.open(url)
-                      }
-                  }),
-                  secondaryButton: .cancel(Text("Dismiss".localized(comment: "Label for button to dismiss the back up completion confirmation."))))
-        }
+        }.padding(viewPadding)
+            .navigationBarTitle("Backup & Restore".localized(comment: "Navigation title for Backup & Restore screen."))
+            .alert(isPresented: $viewModel.backupCompleted) {
+                Alert(title: Text("Backup Completed"),
+                      message: Text("Your backup is complete, would you like to view the file?"),
+                      primaryButton: .default(Text("View".localized(comment: "Label for button to show user the backed up file.")), action: {
+                          if let url = self.viewModel.destinationURL?.enclosingFolderURL() {
+                              UIApplication.shared.open(url)
+                          }
+                      }),
+                      secondaryButton: .cancel(Text("Dismiss".localized(comment: "Label for button to dismiss the back up completion confirmation."))))
+            }
     }
 
     private func isBackingUp() -> Bool {
