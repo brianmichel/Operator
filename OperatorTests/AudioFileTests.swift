@@ -17,7 +17,7 @@ extension XCTestCase {
 
 @testable import Operator
 
-class OperatorTests: XCTestCase {
+class AudioFileTests: XCTestCase {
     func testCanReadFileFormat() throws {
         let url = testBundle.url(forResource: "sample-modified", withExtension: ".aif")!
         let file = AudioFile(url: url)!
@@ -45,7 +45,17 @@ class OperatorTests: XCTestCase {
         let url = testBundle.url(forResource: "sample-modified", withExtension: ".aif")!
         let file = AudioFile(url: url)!
 
-        XCTAssertEqual(file.userDataCount, 1, "Should contain exactly 1 APPL chunk")
+        guard let headerData = file.userData else {
+            XCTFail("Unable to parse APPL chunk header data.")
+            return
+        }
+
+        XCTAssertNotNil(headerData, "There should be structured data available in the APPL chunk.")
+        XCTAssertEqual(headerData.drumVersion, 1, "Drum version should be 1")
+        XCTAssertEqual(headerData.name, "user", "Header should be set to 'user'")
+        XCTAssertEqual(headerData.type, "drum", "Type should be set to 'drum'")
+        XCTAssertEqual(headerData.start.count, 24, "There should be 25 start points")
+        XCTAssertEqual(headerData.end.count, 24, "There should be 25 end points")
     }
 
     func testInfoDictionary() {

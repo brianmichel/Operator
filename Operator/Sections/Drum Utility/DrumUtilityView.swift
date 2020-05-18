@@ -9,10 +9,12 @@
 import SwiftUI
 
 struct DrumUtilityView: View {
+    @ObservedObject var viewModel = DrumUtilityViewModel()
+
     var body: some View {
-        VStack {
-            Text("Hello World")
+        VStack(spacing: 0) {
             Spacer()
+            DrumUtilityWaveView(viewModel: viewModel.waveViewModel)
             KeyboardView().frame(height: 320)
         }.navigationBarTitle("Drum Utility")
     }

@@ -38,7 +38,7 @@ typealias AudioPropertyInfo = (property: AudioFilePropertyID, size: UInt32, writ
 final class AudioFile {
     private let fileId: AudioFileID
 
-    var userDataCount: UInt32 {
+    var userData: RawDrumHeaderMetadata? {
         var itemCount: UInt32 = 0
 
         let code = FourCharCode(stringLiteral: "APPL")
@@ -46,14 +46,14 @@ final class AudioFile {
         let status = AudioFileCountUserData(fileId, code, &itemCount)
 
         guard status == noErr else {
-            return 0
+            return nil
         }
 
         var size: UInt32 = 0
         AudioFileGetUserDataSize(fileId, code, 0, &size)
 
         guard let data: UnsafeMutablePointer<UInt8> = get(userDataPointer: code, index: 0, inputSize: size) else {
-            return 0
+            return nil
         }
         defer {
             data.deallocate()
@@ -66,14 +66,16 @@ final class AudioFile {
             let strippedString = almostJSON[4 ..< almostJSON.count].trimmingCharacters(in: .controlCharacters)
 
             do {
-                let parsed = try JSONSerialization.jsonObject(with: strippedString.data(using: .utf8)!)
+                let parsed = try JSONDecoder().decode(RawDrumHeaderMetadata.self, from: strippedString.data(using: .utf8)!)
                 Log.debug("Parsed: \(parsed)")
+
+                return parsed
             } catch {
                 Log.error("Error Parsing String - \(error)")
             }
         }
 
-        return itemCount
+        return nil
     }
 
     var dataFormat: AudioStreamBasicDescription {
@@ -82,6 +84,14 @@ final class AudioFile {
         }
 
         return description
+    }
+
+    var duration: Float64 {
+        guard let duration: Float64 = get(property: kAudioFilePropertyEstimatedDuration) else {
+            return 0
+        }
+
+        return duration
     }
 
     init?(url: URL) {
@@ -96,8 +106,6 @@ final class AudioFile {
         } else {
             return nil
         }
-
-        Log.debug("Data count: \(userDataCount)")
     }
 
     func get<T>(userData code: FourCharCode, index: UInt32, inputSize: UInt32 = UInt32(MemoryLayout<T>.size)) -> T? {

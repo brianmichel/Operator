@@ -41,8 +41,8 @@ struct KeyboardSectionView: View {
                 HStack(spacing: 2) {
                     ForEach(0 ..< self.wholeKeyCount) { _ in
                         Button(action: {}, label: {
-                            Text("whole").frame(width: reader.size.width / CGFloat(self.wholeKeyCount),
-                                                height: 200)
+                            Text("").frame(width: reader.size.width / CGFloat(self.wholeKeyCount),
+                                           height: 200)
                         }).buttonStyle(KeyboardWholeKeyButtonStyle())
                     }
                 }

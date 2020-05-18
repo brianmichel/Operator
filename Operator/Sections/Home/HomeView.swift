@@ -35,7 +35,7 @@ struct HomeView: View {
                 .environment(\.horizontalSizeClass, .regular)
                 .environment(\.horizontalSizeClass, .compact)
             WelcomeView()
-        }.navigationViewStyle(DoubleColumnNavigationViewStyle())
+        }
     }
 }
 
