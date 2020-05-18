@@ -32,7 +32,10 @@ struct KeyboardSectionView: View {
             VStack(spacing: 2) {
                 HStack(spacing: 2) {
                     ForEach(0 ..< self.halfKeyCount) { index in
-                        Button(action: {}, label: {
+                        Button(action: {
+                            Haptics().emit(style: .soft)
+
+                        }, label: {
                             Text("").frame(width: reader.size.width / CGFloat(self.halfKeyCount),
                                            height: 20)
                         }).buttonStyle(KeyboardHalfKeyButtonStyle(position: self.position(for: index, in: self.halfKeyCount)))
@@ -40,7 +43,10 @@ struct KeyboardSectionView: View {
                 }
                 HStack(spacing: 2) {
                     ForEach(0 ..< self.wholeKeyCount) { _ in
-                        Button(action: {}, label: {
+                        Button(action: {
+                            Haptics().emit(style: .soft)
+
+                        }, label: {
                             Text("").frame(width: reader.size.width / CGFloat(self.wholeKeyCount),
                                            height: 200)
                         }).buttonStyle(KeyboardWholeKeyButtonStyle())

@@ -28,6 +28,7 @@
 		72704C822460EF7C006F3E99 /* sample-adjusted.aif in Resources */ = {isa = PBXBuildFile; fileRef = 72704C812460EF7C006F3E99 /* sample-adjusted.aif */; };
 		72704C862460EFB7006F3E99 /* AudioFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72704C852460EFB7006F3E99 /* AudioFile.swift */; };
 		72704C8E2460EFEB006F3E99 /* AudioFileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72704C8D2460EFEB006F3E99 /* AudioFileTests.swift */; };
+		7286171524723DBA00495523 /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7286171424723DBA00495523 /* Haptics.swift */; };
 		729E6FE6246CE2AC0015B30D /* sample-modified.aif in Resources */ = {isa = PBXBuildFile; fileRef = 722F0F2B246CE18800C857E9 /* sample-modified.aif */; };
 		729E6FE7246CE2AF0015B30D /* sample-adjusted.aif in Resources */ = {isa = PBXBuildFile; fileRef = 72704C962460F099006F3E99 /* sample-adjusted.aif */; };
 		72A22CDD247058A700978DE6 /* Compression_Algorithm+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A22CDC247058A700978DE6 /* Compression_Algorithm+Extensions.swift */; };
@@ -95,6 +96,7 @@
 		72704C8D2460EFEB006F3E99 /* AudioFileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioFileTests.swift; sourceTree = "<group>"; };
 		72704C8F2460EFEB006F3E99 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		72704C962460F099006F3E99 /* sample-adjusted.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sample-adjusted.aif"; sourceTree = "<group>"; };
+		7286171424723DBA00495523 /* Haptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptics.swift; sourceTree = "<group>"; };
 		72A22CDC247058A700978DE6 /* Compression_Algorithm+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Compression_Algorithm+Extensions.swift"; sourceTree = "<group>"; };
 		72B75560247174D100FA8B3B /* BulletedVStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletedVStack.swift; sourceTree = "<group>"; };
 		72B7556224717EAE00FA8B3B /* CircleBullet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleBullet.swift; sourceTree = "<group>"; };
@@ -274,6 +276,7 @@
 				726A21EF24701C2A00DBAB87 /* Logging */,
 				72352437246D006200F58C61 /* Extensions */,
 				72704C842460EF9E006F3E99 /* Audio */,
+				7286171424723DBA00495523 /* Haptics.swift */,
 			);
 			path = Infrastructure;
 			sourceTree = "<group>";
@@ -550,6 +553,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7286171524723DBA00495523 /* Haptics.swift in Sources */,
 				723A76982472216600FF17E2 /* DrumUtilityWaveView.swift in Sources */,
 				726A2201247043A400DBAB87 /* BackupView.swift in Sources */,
 				72BDC2AA2470C2BB00361464 /* Colors.swift in Sources */,
