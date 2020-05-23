@@ -12,6 +12,7 @@
 		7203EF5D247212330015C7F3 /* DrumHeaderMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7203EF5C247212330015C7F3 /* DrumHeaderMetadata.swift */; };
 		7203EF5F247215FF0015C7F3 /* DrumHeaderMetadataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7203EF5E247215FF0015C7F3 /* DrumHeaderMetadataTests.swift */; };
 		72352439246D006D00F58C61 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72352438246D006D00F58C61 /* String+Extensions.swift */; };
+		7238A17824796F4A001E9C8E /* KeyboardSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7238A17724796F4A001E9C8E /* KeyboardSectionView.swift */; };
 		723A76982472216600FF17E2 /* DrumUtilityWaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723A76972472216600FF17E2 /* DrumUtilityWaveView.swift */; };
 		726A21F124701C4800DBAB87 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726A21F024701C4800DBAB87 /* Log.swift */; };
 		726A21F324701C5D00DBAB87 /* LogFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726A21F224701C5D00DBAB87 /* LogFormatter.swift */; };
@@ -32,6 +33,7 @@
 		729E6FE6246CE2AC0015B30D /* sample-modified.aif in Resources */ = {isa = PBXBuildFile; fileRef = 722F0F2B246CE18800C857E9 /* sample-modified.aif */; };
 		729E6FE7246CE2AF0015B30D /* sample-adjusted.aif in Resources */ = {isa = PBXBuildFile; fileRef = 72704C962460F099006F3E99 /* sample-adjusted.aif */; };
 		72A22CDD247058A700978DE6 /* Compression_Algorithm+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A22CDC247058A700978DE6 /* Compression_Algorithm+Extensions.swift */; };
+		72A9BEBD24756D8D00F34C43 /* FourCharCode+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A9BEBC24756D8D00F34C43 /* FourCharCode+Extensions.swift */; };
 		72B75561247174D100FA8B3B /* BulletedVStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B75560247174D100FA8B3B /* BulletedVStack.swift */; };
 		72B7556324717EAE00FA8B3B /* CircleBullet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B7556224717EAE00FA8B3B /* CircleBullet.swift */; };
 		72B75566247195EC00FA8B3B /* KnobsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B75565247195EC00FA8B3B /* KnobsView.swift */; };
@@ -74,6 +76,7 @@
 		7203EF5E247215FF0015C7F3 /* DrumHeaderMetadataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrumHeaderMetadataTests.swift; sourceTree = "<group>"; };
 		722F0F2B246CE18800C857E9 /* sample-modified.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sample-modified.aif"; sourceTree = "<group>"; };
 		72352438246D006D00F58C61 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
+		7238A17724796F4A001E9C8E /* KeyboardSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardSectionView.swift; sourceTree = "<group>"; };
 		723A76972472216600FF17E2 /* DrumUtilityWaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrumUtilityWaveView.swift; sourceTree = "<group>"; };
 		726A21F024701C4800DBAB87 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		726A21F224701C5D00DBAB87 /* LogFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogFormatter.swift; sourceTree = "<group>"; };
@@ -98,6 +101,7 @@
 		72704C962460F099006F3E99 /* sample-adjusted.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sample-adjusted.aif"; sourceTree = "<group>"; };
 		7286171424723DBA00495523 /* Haptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptics.swift; sourceTree = "<group>"; };
 		72A22CDC247058A700978DE6 /* Compression_Algorithm+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Compression_Algorithm+Extensions.swift"; sourceTree = "<group>"; };
+		72A9BEBC24756D8D00F34C43 /* FourCharCode+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FourCharCode+Extensions.swift"; sourceTree = "<group>"; };
 		72B75560247174D100FA8B3B /* BulletedVStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletedVStack.swift; sourceTree = "<group>"; };
 		72B7556224717EAE00FA8B3B /* CircleBullet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleBullet.swift; sourceTree = "<group>"; };
 		72B75565247195EC00FA8B3B /* KnobsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnobsView.swift; sourceTree = "<group>"; };
@@ -155,8 +159,20 @@
 				72A22CDC247058A700978DE6 /* Compression_Algorithm+Extensions.swift */,
 				72BDC2A72470C2A000361464 /* UIColor+Extensions.swift */,
 				72CBCD682471C496003D0476 /* URL+Extensions.swift */,
+				72A9BEBC24756D8D00F34C43 /* FourCharCode+Extensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		7238A17624796F1D001E9C8E /* Keyboard */ = {
+			isa = PBXGroup;
+			children = (
+				72CBCD6F2471D2B1003D0476 /* KeyboardView.swift */,
+				72CBCD712471D77C003D0476 /* KeyboardHalfKeyButtonStyle.swift */,
+				72CBCD732471E402003D0476 /* KeyboardWholeKeyButtonStyle.swift */,
+				7238A17724796F4A001E9C8E /* KeyboardSectionView.swift */,
+			);
+			path = Keyboard;
 			sourceTree = "<group>";
 		};
 		726A21EF24701C2A00DBAB87 /* Logging */ = {
@@ -337,10 +353,8 @@
 		72CBCD6C2471CECA003D0476 /* Drum Utility */ = {
 			isa = PBXGroup;
 			children = (
+				7238A17624796F1D001E9C8E /* Keyboard */,
 				72CBCD6D2471CEE0003D0476 /* DrumUtilityView.swift */,
-				72CBCD6F2471D2B1003D0476 /* KeyboardView.swift */,
-				72CBCD712471D77C003D0476 /* KeyboardHalfKeyButtonStyle.swift */,
-				72CBCD732471E402003D0476 /* KeyboardWholeKeyButtonStyle.swift */,
 				7203EF5824720B150015C7F3 /* DrumUtilityViewModel.swift */,
 				723A76972472216600FF17E2 /* DrumUtilityWaveView.swift */,
 			);
@@ -580,6 +594,8 @@
 				72BDC2A82470C2A000361464 /* UIColor+Extensions.swift in Sources */,
 				72CBCD742471E402003D0476 /* KeyboardWholeKeyButtonStyle.swift in Sources */,
 				72B7556324717EAE00FA8B3B /* CircleBullet.swift in Sources */,
+				7238A17824796F4A001E9C8E /* KeyboardSectionView.swift in Sources */,
+				72A9BEBD24756D8D00F34C43 /* FourCharCode+Extensions.swift in Sources */,
 				7203EF5D247212330015C7F3 /* DrumHeaderMetadata.swift in Sources */,
 				72CBCD692471C497003D0476 /* URL+Extensions.swift in Sources */,
 				72CBCD722471D77C003D0476 /* KeyboardHalfKeyButtonStyle.swift in Sources */,

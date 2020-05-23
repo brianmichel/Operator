@@ -15,7 +15,9 @@ struct DrumUtilityView: View {
         VStack(spacing: 0) {
             Spacer()
             DrumUtilityWaveView(viewModel: viewModel.waveViewModel)
-            KeyboardView().frame(height: 320)
+            KeyboardView { action in
+                self.viewModel.didPressKey(action: action)
+            }.frame(height: 320)
         }.navigationBarTitle("Drum Utility")
     }
 }

@@ -18,6 +18,11 @@ struct DrumUtilityWaveView: View {
     var body: some View {
         GeometryReader { reader in
             VStack {
+                HStack {
+                    Toggle(isOn: self.$viewModel.showRelativeSlicing, label: {
+                        Text("Show relative slicing".localized(comment: "Button label that enabled slicing of samples based on their relative size."))
+                    })
+                }.padding()
                 ScrollView(.horizontal, showsIndicators: false) {
                     ZStack(alignment: .bottom) {
                         Rectangle().fill(Color.clear)
@@ -32,13 +37,6 @@ struct DrumUtilityWaveView: View {
                         }
                     }
                 }
-                Button(action: {
-                    withAnimation(.linear) {
-                        self.viewModel.showRelativeSlicing.toggle()
-                    }
-                }, label: {
-                    Text("Toggle slicing")
-                }).buttonStyle(AppleButtonStyle()).padding()
             }
         }
     }

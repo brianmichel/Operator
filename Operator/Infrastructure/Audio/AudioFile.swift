@@ -8,31 +8,6 @@
 
 import AudioToolbox
 
-struct ApplicationSpecificChunk {
-    let ckID: UInt32
-    let ckSize: Int32
-    let applicationSignature: OSType
-    let data: NSString
-}
-
-// https://gist.github.com/patrickjuchli/d1b07f97e0ea1da5db09
-extension FourCharCode {
-    public init(stringLiteral value: StringLiteralType) {
-        var code: FourCharCode = 0
-        // Value has to consist of 4 printable ASCII characters, e.g. '420v'.
-        // Note: This implementation does not enforce printable range (32-126)
-        if value.count == 4, value.utf8.count == 4 {
-            for byte in value.utf8 {
-                code = code << 8 + FourCharCode(byte)
-            }
-        } else {
-            Log.warn("FourCharCode: Can't initialize with '\(value)', only printable ASCII allowed. Setting to '????'.")
-            code = 0x3F3F_3F3F // = '????'
-        }
-        self = code
-    }
-}
-
 typealias AudioPropertyInfo = (property: AudioFilePropertyID, size: UInt32, writable: UInt32)
 
 final class AudioFile {

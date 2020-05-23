@@ -28,6 +28,10 @@ final class DrumUtilityViewModel: ObservableObject {
         attemptToLoad(audioFile: Bundle.main.url(forResource: "sample-adjusted", withExtension: ".aif")!)
     }
 
+    func didPressKey(action: KeyPress) {
+        Log.debug("Did press \(action.direction) in section: \(action.section) at key \(action.key)")
+    }
+
     private func attemptToLoad(audioFile url: URL) {
         guard let file = AudioFile(url: url),
             let rawMetadata = file.userData,

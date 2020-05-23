@@ -8,6 +8,25 @@
 
 import SwiftUI
 
+struct TouchDownViewModifier: ViewModifier {
+    @State private var touchDown = false
+
+    var action: (() -> Void)?
+
+    func body(content: Content) -> some View {
+        let drag = DragGesture(minimumDistance: 0).onChanged { _ in
+            if !self.touchDown {
+                self.touchDown = true
+                self.action?()
+            }
+        }.onEnded { _ in
+            self.touchDown = false
+        }
+
+        return content.gesture(drag)
+    }
+}
+
 struct KeyboardHalfKeyButtonStyle: ButtonStyle {
     enum HalfKeyPosition {
         case first

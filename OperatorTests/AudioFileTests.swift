@@ -37,7 +37,8 @@ class AudioFileTests: XCTestCase {
             return
         }
 
-        XCTAssertEqual(description.mSampleRate, Float64(Float(44100)))
+        XCTAssertEqual(description.mBitsPerChannel, UInt32(16))
+        XCTAssertEqual(description.mSampleRate, Float64(44100.0))
         XCTAssertEqual(description.mFormatID, kAudioFormatLinearPCM)
     }
 
