@@ -6,6 +6,7 @@
 //  Copyright © 2020 Brian Michel. All rights reserved.
 //
 
+import AVFoundation
 import Combine
 import Foundation
 
@@ -22,7 +23,10 @@ struct SampleMarker: Identifiable {
 
 final class DrumUtilityViewModel: ObservableObject {
     @Published private(set) var selectedAudioFile: AudioFile?
+    private var samples: [DrumSample]?
     @Published private(set) var waveViewModel = DrumUtilityWaveViewModel()
+
+    private var engine = AVAudioEngine()
 
     init() {
         attemptToLoad(audioFile: Bundle.main.url(forResource: "sample-adjusted", withExtension: ".aif")!)
@@ -30,6 +34,15 @@ final class DrumUtilityViewModel: ObservableObject {
 
     func didPressKey(action: KeyPress) {
         Log.debug("Did press \(action.direction) in section: \(action.section) at key \(action.key)")
+
+        if let drumSamples = samples {
+            switch action.direction {
+            case .up:
+                connectAndPlay(sample: drumSamples[0])
+            case .down:
+                disconnectAndStop(sample: drumSamples[0])
+            }
+        }
     }
 
     private func attemptToLoad(audioFile url: URL) {
@@ -52,6 +65,51 @@ final class DrumUtilityViewModel: ObservableObject {
         }
 
         waveViewModel.markers = relativeStartMarkers
-        Log.debug("Generated relative markers - \(relativeStartMarkers)")
+        let generator = DrumSamplesGenerator(file: file)
+        samples = generator.generate()
+
+        selectedAudioFile = file
+    }
+
+    private func createAudioEngine(from file: AudioFile) -> AVAudioEngine {
+        let engine = AVAudioEngine()
+        let mainMixer = engine.mainMixerNode
+        let output = engine.outputNode
+
+        var streamDescription = file.dataFormat
+        let inputFormat = AVAudioFormat(streamDescription: &streamDescription)
+        let outputFormat = output.inputFormat(forBus: 0)
+
+        engine.connect(mainMixer, to: output, format: outputFormat)
+
+        return engine
+    }
+
+    private func connectAndPlay(sample: DrumSample) {
+        let inputFormat = sample.audioNode.node!.inputFormat(forBus: 0)
+
+        let mainMixer = engine.mainMixerNode
+        let outputNode = engine.outputNode
+        let sourceNode = sample.audioNode.node!
+
+        engine.attach(sourceNode)
+        engine.connect(sourceNode, to: mainMixer, format: AVAudioFormat(commonFormat: .pcmFormatInt16, sampleRate: 44100, channels: 1, interleaved: false))
+        engine.connect(mainMixer, to: outputNode, format: nil)
+
+        engine.mainMixerNode.outputVolume = 0.9
+
+        do {
+            try engine.start()
+        } catch {
+            Log.error("Unable to start engine due to error - \(error)")
+        }
+    }
+
+    private func disconnectAndStop(sample _: DrumSample) {
+//        engine.stop()
+//        if engine.outputNode. {
+//            <#code#>
+//        }
+//        engine.disconnectNodeInput(sample.audioNode, bus: 0)
     }
 }

@@ -13,7 +13,9 @@
 		7203EF5F247215FF0015C7F3 /* DrumHeaderMetadataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7203EF5E247215FF0015C7F3 /* DrumHeaderMetadataTests.swift */; };
 		72352439246D006D00F58C61 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72352438246D006D00F58C61 /* String+Extensions.swift */; };
 		7238A17824796F4A001E9C8E /* KeyboardSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7238A17724796F4A001E9C8E /* KeyboardSectionView.swift */; };
+		7238A17A24797FC0001E9C8E /* DrumPatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7238A17924797FC0001E9C8E /* DrumPatch.swift */; };
 		723A76982472216600FF17E2 /* DrumUtilityWaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723A76972472216600FF17E2 /* DrumUtilityWaveView.swift */; };
+		72460CFE2479AC4600699E26 /* DrumSamplesGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72460CFD2479AC4600699E26 /* DrumSamplesGenerator.swift */; };
 		726A21F124701C4800DBAB87 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726A21F024701C4800DBAB87 /* Log.swift */; };
 		726A21F324701C5D00DBAB87 /* LogFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726A21F224701C5D00DBAB87 /* LogFormatter.swift */; };
 		726A21F92470260A00DBAB87 /* DeviceLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726A21F82470260A00DBAB87 /* DeviceLocator.swift */; };
@@ -51,9 +53,11 @@
 		72CBCD702471D2B2003D0476 /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72CBCD6F2471D2B1003D0476 /* KeyboardView.swift */; };
 		72CBCD722471D77C003D0476 /* KeyboardHalfKeyButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72CBCD712471D77C003D0476 /* KeyboardHalfKeyButtonStyle.swift */; };
 		72CBCD742471E402003D0476 /* KeyboardWholeKeyButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72CBCD732471E402003D0476 /* KeyboardWholeKeyButtonStyle.swift */; };
+		72EB63DF247AD605008F7DDD /* AudioSourceNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72EB63DE247AD605008F7DDD /* AudioSourceNode.swift */; };
 		72F291062470523A00561B16 /* FolderCompressor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F291052470523A00561B16 /* FolderCompressor.swift */; };
 		72F291082470561100561B16 /* FileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F291072470561100561B16 /* FileHelper.swift */; };
 		72F2910B2470569E00561B16 /* Compressor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F2910A2470569E00561B16 /* Compressor.swift */; };
+		72FFF8A9247AB35F00E4653A /* DrumSamplesGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FFF8A8247AB35F00E4653A /* DrumSamplesGeneratorTests.swift */; };
 		ADFC6710673E8CF9E1D4CA09 /* Pods_Operator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74BB7A1EA27FF1D3D013C7BC /* Pods_Operator.framework */; };
 /* End PBXBuildFile section */
 
@@ -77,7 +81,9 @@
 		722F0F2B246CE18800C857E9 /* sample-modified.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sample-modified.aif"; sourceTree = "<group>"; };
 		72352438246D006D00F58C61 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		7238A17724796F4A001E9C8E /* KeyboardSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardSectionView.swift; sourceTree = "<group>"; };
+		7238A17924797FC0001E9C8E /* DrumPatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrumPatch.swift; sourceTree = "<group>"; };
 		723A76972472216600FF17E2 /* DrumUtilityWaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrumUtilityWaveView.swift; sourceTree = "<group>"; };
+		72460CFD2479AC4600699E26 /* DrumSamplesGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrumSamplesGenerator.swift; sourceTree = "<group>"; };
 		726A21F024701C4800DBAB87 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		726A21F224701C5D00DBAB87 /* LogFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogFormatter.swift; sourceTree = "<group>"; };
 		726A21F82470260A00DBAB87 /* DeviceLocator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceLocator.swift; sourceTree = "<group>"; };
@@ -119,9 +125,11 @@
 		72CBCD6F2471D2B1003D0476 /* KeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
 		72CBCD712471D77C003D0476 /* KeyboardHalfKeyButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHalfKeyButtonStyle.swift; sourceTree = "<group>"; };
 		72CBCD732471E402003D0476 /* KeyboardWholeKeyButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardWholeKeyButtonStyle.swift; sourceTree = "<group>"; };
+		72EB63DE247AD605008F7DDD /* AudioSourceNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioSourceNode.swift; sourceTree = "<group>"; };
 		72F291052470523A00561B16 /* FolderCompressor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderCompressor.swift; sourceTree = "<group>"; };
 		72F291072470561100561B16 /* FileHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileHelper.swift; sourceTree = "<group>"; };
 		72F2910A2470569E00561B16 /* Compressor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Compressor.swift; sourceTree = "<group>"; };
+		72FFF8A8247AB35F00E4653A /* DrumSamplesGeneratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrumSamplesGeneratorTests.swift; sourceTree = "<group>"; };
 		74BB7A1EA27FF1D3D013C7BC /* Pods_Operator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Operator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -303,6 +311,9 @@
 				72704C852460EFB7006F3E99 /* AudioFile.swift */,
 				7203EF5A24720C120015C7F3 /* RawDrumHeaderMetadata.swift */,
 				7203EF5C247212330015C7F3 /* DrumHeaderMetadata.swift */,
+				7238A17924797FC0001E9C8E /* DrumPatch.swift */,
+				72460CFD2479AC4600699E26 /* DrumSamplesGenerator.swift */,
+				72EB63DE247AD605008F7DDD /* AudioSourceNode.swift */,
 			);
 			path = Audio;
 			sourceTree = "<group>";
@@ -315,6 +326,7 @@
 				72704C8F2460EFEB006F3E99 /* Info.plist */,
 				72CBCD6A2471C52C003D0476 /* URLTests.swift */,
 				7203EF5E247215FF0015C7F3 /* DrumHeaderMetadataTests.swift */,
+				72FFF8A8247AB35F00E4653A /* DrumSamplesGeneratorTests.swift */,
 			);
 			path = OperatorTests;
 			sourceTree = "<group>";
@@ -576,6 +588,7 @@
 				72704C862460EFB7006F3E99 /* AudioFile.swift in Sources */,
 				72A22CDD247058A700978DE6 /* Compression_Algorithm+Extensions.swift in Sources */,
 				726A21FF2470439800DBAB87 /* BackupViewModel.swift in Sources */,
+				72460CFE2479AC4600699E26 /* DrumSamplesGenerator.swift in Sources */,
 				72CBCD672471B6D2003D0476 /* WelcomeView.swift in Sources */,
 				72F291082470561100561B16 /* FileHelper.swift in Sources */,
 				72C77F49247048B6003907E7 /* DocumentPicker.swift in Sources */,
@@ -588,6 +601,7 @@
 				72704C6B2460EF10006F3E99 /* AppDelegate.swift in Sources */,
 				72704C6D2460EF10006F3E99 /* SceneDelegate.swift in Sources */,
 				72704C6F2460EF10006F3E99 /* HomeView.swift in Sources */,
+				72EB63DF247AD605008F7DDD /* AudioSourceNode.swift in Sources */,
 				726A21FB24702E3C00DBAB87 /* Application.swift in Sources */,
 				72CBCD652471B46C003D0476 /* BackupInProgressView.swift in Sources */,
 				72BDC2A42470BE1100361464 /* NeumorphicButtonStyle.swift in Sources */,
@@ -605,6 +619,7 @@
 				7203EF5B24720C120015C7F3 /* RawDrumHeaderMetadata.swift in Sources */,
 				72CBCD702471D2B2003D0476 /* KeyboardView.swift in Sources */,
 				72B75566247195EC00FA8B3B /* KnobsView.swift in Sources */,
+				7238A17A24797FC0001E9C8E /* DrumPatch.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -613,6 +628,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				72704C8E2460EFEB006F3E99 /* AudioFileTests.swift in Sources */,
+				72FFF8A9247AB35F00E4653A /* DrumSamplesGeneratorTests.swift in Sources */,
 				72CBCD6B2471C52C003D0476 /* URLTests.swift in Sources */,
 				7203EF5F247215FF0015C7F3 /* DrumHeaderMetadataTests.swift in Sources */,
 			);

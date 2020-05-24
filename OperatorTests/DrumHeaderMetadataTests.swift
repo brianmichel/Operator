@@ -22,7 +22,7 @@ class DrumHeaderMetadataTests: XCTestCase {
             return
         }
 
-        XCTAssertEqual(metadata.markers.count, 24, "There should be 25 markers")
+        XCTAssertEqual(metadata.markers.count, 24, "There should be 24 markers")
     }
 
 }

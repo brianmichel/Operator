@@ -8,6 +8,7 @@
 
 import XCTest
 import AudioToolbox
+import AVFoundation
 
 extension XCTestCase {
     var testBundle: Bundle {
@@ -37,6 +38,7 @@ class AudioFileTests: XCTestCase {
             return
         }
 
+        XCTAssertEqual(Float64(file.totalBytes), description.mSampleRate * file.duration * Float64(description.mChannelsPerFrame))
         XCTAssertEqual(description.mBitsPerChannel, UInt32(16))
         XCTAssertEqual(description.mSampleRate, Float64(44100.0))
         XCTAssertEqual(description.mFormatID, kAudioFormatLinearPCM)
@@ -69,5 +71,17 @@ class AudioFileTests: XCTestCase {
         }
 
         XCTAssertGreaterThan(info.allKeys.count, 0)
+    }
+
+    func testShoudlCreateAVAudioFile() {
+        let url = testBundle.url(forResource: "sample-adjusted", withExtension: ".aif")!
+        let file = AudioFile(url: url)!
+
+        let header = DrumHeaderMetadata(rawHeader: file.userData!)!
+        let firstMarker = header.markers.first!
+
+        let avAudioFile = file.createAudioSourceNode(startTime: firstMarker.start, endTime: firstMarker.end)
+
+        XCTAssertNotNil(avAudioFile, "AVAudioFile should not be nil.")
     }
 }

@@ -7,13 +7,16 @@
 //
 
 import AudioToolbox
+import AVFoundation
+import CoreAudio
 
 typealias AudioPropertyInfo = (property: AudioFilePropertyID, size: UInt32, writable: UInt32)
 
 final class AudioFile {
+    private let url: URL
     private let fileId: AudioFileID
 
-    var userData: RawDrumHeaderMetadata? {
+    lazy var userData: RawDrumHeaderMetadata? = {
         var itemCount: UInt32 = 0
 
         let code = FourCharCode(stringLiteral: "APPL")
@@ -33,7 +36,6 @@ final class AudioFile {
         defer {
             data.deallocate()
         }
-
         // Explicitly do not free when done here since we're not copying the raw pointer bytes (gotta go fast)
         let string: String? = String(cString: data)
         // Determine if we've reached the OP-1 JSON, and if so advance 4 bytes and strip control characters.
@@ -51,7 +53,7 @@ final class AudioFile {
         }
 
         return nil
-    }
+    }()
 
     var dataFormat: AudioStreamBasicDescription {
         guard let description: AudioStreamBasicDescription = get(property: kAudioFilePropertyDataFormat) else {
@@ -59,6 +61,14 @@ final class AudioFile {
         }
 
         return description
+    }
+
+    var totalBytes: UInt64 {
+        guard let totalBytes: UInt64 = get(property: kAudioFilePropertyAudioDataByteCount) else {
+            return 0
+        }
+
+        return totalBytes
     }
 
     var duration: Float64 {
@@ -70,6 +80,7 @@ final class AudioFile {
     }
 
     init?(url: URL) {
+        self.url = url
         var audioFile: AudioFileID?
 
         let status = AudioFileOpenURL(url as CFURL, .readPermission, kAudioFileAIFFType, &audioFile)
@@ -157,6 +168,29 @@ final class AudioFile {
         }
 
         return nil
+    }
+
+    func createAudioSourceNode(startTime: Double, endTime: Double) -> AudioSourceNode {
+        // From https://developer.apple.com/documentation/coreaudiotypes/audiostreambasicdescription?language=objc
+        let onePacketDuration = (1 / dataFormat.mSampleRate) * Double(dataFormat.mFramesPerPacket)
+        let startPacket = Int64(onePacketDuration * startTime)
+        var numberOfPacketsToRead = UInt32((endTime - startTime) / onePacketDuration)
+
+        let descriptions = unsafeBitCast(calloc(Int(numberOfPacketsToRead), MemoryLayout<AudioStreamPacketDescription>.size), to: UnsafeMutablePointer<AudioStreamPacketDescription>.self)
+
+        var numberOfBytesRead = UInt32(numberOfPacketsToRead * dataFormat.mBytesPerPacket)
+        let buffer = unsafeBitCast(calloc(Int(numberOfBytesRead), Int(dataFormat.mBitsPerChannel)), to: UnsafeMutablePointer<UInt16>.self)
+
+        defer {
+            buffer.deallocate()
+            descriptions.deallocate()
+        }
+
+        AudioFileReadPacketData(fileId, false, &numberOfBytesRead, descriptions, startPacket, &numberOfPacketsToRead, buffer)
+
+        let node = AudioSourceNode(buffer: buffer, size: numberOfPacketsToRead, format: dataFormat)
+
+        return node
     }
 
     deinit {
