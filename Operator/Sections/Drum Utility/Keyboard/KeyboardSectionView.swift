@@ -20,11 +20,10 @@ struct KeyboardSectionView: View {
                 HStack(spacing: 2) {
                     ForEach(0 ..< self.configuration.halfKeys) { index in
                         Button(action: {
-                            Haptics().emit(style: .soft)
                             self.action?(KeyPress(
                                 section: self.section,
                                 key: self.halfKeyAdjustedIndex(for: index),
-                                direction: .down
+                                direction: .up
                             ))
                         }, label: {
                             Text("").frame(width: reader.size.width / CGFloat(self.configuration.halfKeys),
@@ -35,13 +34,13 @@ struct KeyboardSectionView: View {
                                 self.action?(KeyPress(section: self.section,
                                                       key: self.halfKeyAdjustedIndex(for: index),
                                                       direction: .down))
+                                Haptics().emit(style: .soft)
                             }))
                     }
                 }
                 HStack(spacing: 2) {
                     ForEach(0 ..< self.configuration.wholeKeys) { index in
                         Button(action: {
-                            Haptics().emit(style: .soft)
                             self.action?(KeyPress(
                                 section: self.section,
                                 key: self.wholeKeyAdjustedIndex(for: index),
@@ -54,6 +53,7 @@ struct KeyboardSectionView: View {
                             self.action?(KeyPress(section: self.section,
                                                   key: self.wholeKeyAdjustedIndex(for: index),
                                                   direction: .down))
+                            Haptics().emit(style: .soft)
                         }))
                     }
                 }

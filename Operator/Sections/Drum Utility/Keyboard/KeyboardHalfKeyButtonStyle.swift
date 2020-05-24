@@ -23,7 +23,7 @@ struct TouchDownViewModifier: ViewModifier {
             self.touchDown = false
         }
 
-        return content.gesture(drag)
+        return content.simultaneousGesture(drag)
     }
 }
 

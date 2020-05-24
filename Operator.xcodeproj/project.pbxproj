@@ -53,7 +53,6 @@
 		72CBCD702471D2B2003D0476 /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72CBCD6F2471D2B1003D0476 /* KeyboardView.swift */; };
 		72CBCD722471D77C003D0476 /* KeyboardHalfKeyButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72CBCD712471D77C003D0476 /* KeyboardHalfKeyButtonStyle.swift */; };
 		72CBCD742471E402003D0476 /* KeyboardWholeKeyButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72CBCD732471E402003D0476 /* KeyboardWholeKeyButtonStyle.swift */; };
-		72EB63DF247AD605008F7DDD /* AudioSourceNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72EB63DE247AD605008F7DDD /* AudioSourceNode.swift */; };
 		72F291062470523A00561B16 /* FolderCompressor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F291052470523A00561B16 /* FolderCompressor.swift */; };
 		72F291082470561100561B16 /* FileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F291072470561100561B16 /* FileHelper.swift */; };
 		72F2910B2470569E00561B16 /* Compressor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F2910A2470569E00561B16 /* Compressor.swift */; };
@@ -125,7 +124,6 @@
 		72CBCD6F2471D2B1003D0476 /* KeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
 		72CBCD712471D77C003D0476 /* KeyboardHalfKeyButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHalfKeyButtonStyle.swift; sourceTree = "<group>"; };
 		72CBCD732471E402003D0476 /* KeyboardWholeKeyButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardWholeKeyButtonStyle.swift; sourceTree = "<group>"; };
-		72EB63DE247AD605008F7DDD /* AudioSourceNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioSourceNode.swift; sourceTree = "<group>"; };
 		72F291052470523A00561B16 /* FolderCompressor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderCompressor.swift; sourceTree = "<group>"; };
 		72F291072470561100561B16 /* FileHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileHelper.swift; sourceTree = "<group>"; };
 		72F2910A2470569E00561B16 /* Compressor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Compressor.swift; sourceTree = "<group>"; };
@@ -313,7 +311,6 @@
 				7203EF5C247212330015C7F3 /* DrumHeaderMetadata.swift */,
 				7238A17924797FC0001E9C8E /* DrumPatch.swift */,
 				72460CFD2479AC4600699E26 /* DrumSamplesGenerator.swift */,
-				72EB63DE247AD605008F7DDD /* AudioSourceNode.swift */,
 			);
 			path = Audio;
 			sourceTree = "<group>";
@@ -601,7 +598,6 @@
 				72704C6B2460EF10006F3E99 /* AppDelegate.swift in Sources */,
 				72704C6D2460EF10006F3E99 /* SceneDelegate.swift in Sources */,
 				72704C6F2460EF10006F3E99 /* HomeView.swift in Sources */,
-				72EB63DF247AD605008F7DDD /* AudioSourceNode.swift in Sources */,
 				726A21FB24702E3C00DBAB87 /* Application.swift in Sources */,
 				72CBCD652471B46C003D0476 /* BackupInProgressView.swift in Sources */,
 				72BDC2A42470BE1100361464 /* NeumorphicButtonStyle.swift in Sources */,

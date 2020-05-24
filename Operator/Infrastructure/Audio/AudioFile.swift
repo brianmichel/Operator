@@ -6,6 +6,7 @@
 //  Copyright © 2020 Brian Michel. All rights reserved.
 //
 
+import AudioKit
 import AudioToolbox
 import AVFoundation
 import CoreAudio
@@ -15,6 +16,7 @@ typealias AudioPropertyInfo = (property: AudioFilePropertyID, size: UInt32, writ
 final class AudioFile {
     private let url: URL
     private let fileId: AudioFileID
+    private let audioFile: AKAudioFile
 
     lazy var userData: RawDrumHeaderMetadata? = {
         var itemCount: UInt32 = 0
@@ -86,6 +88,12 @@ final class AudioFile {
         let status = AudioFileOpenURL(url as CFURL, .readPermission, kAudioFileAIFFType, &audioFile)
 
         Log.debug("status: \(status)")
+
+        do {
+            self.audioFile = try AKAudioFile(forReading: url)
+        } catch {
+            return nil
+        }
 
         if let file = audioFile {
             fileId = file
@@ -161,8 +169,6 @@ final class AudioFile {
                                           &size,
                                           propertyData)
 
-        Log.debug("Got status \(status) when looking for property \(property)")
-
         if status == noErr, size > 0 {
             return propertyData.pointee
         }
@@ -170,27 +176,21 @@ final class AudioFile {
         return nil
     }
 
-    func createAudioSourceNode(startTime: Double, endTime: Double) -> AudioSourceNode {
-        // From https://developer.apple.com/documentation/coreaudiotypes/audiostreambasicdescription?language=objc
-        let onePacketDuration = (1 / dataFormat.mSampleRate) * Double(dataFormat.mFramesPerPacket)
-        let startPacket = Int64(onePacketDuration * startTime)
-        var numberOfPacketsToRead = UInt32((endTime - startTime) / onePacketDuration)
+    func createAudioPlayerForSlice(at startTime: Double, to endTime: Double) -> AKAudioPlayer? {
+        do {
+            let onePacketDuration = dataFormat.mSampleRate
+            let startPacket = Int64(onePacketDuration * startTime)
+            let endPacket = Int64(onePacketDuration * endTime)
+            let clip = try audioFile.extracted(fromSample: startPacket, toSample: endPacket)
 
-        let descriptions = unsafeBitCast(calloc(Int(numberOfPacketsToRead), MemoryLayout<AudioStreamPacketDescription>.size), to: UnsafeMutablePointer<AudioStreamPacketDescription>.self)
+            let player = try AKAudioPlayer(file: clip)
 
-        var numberOfBytesRead = UInt32(numberOfPacketsToRead * dataFormat.mBytesPerPacket)
-        let buffer = unsafeBitCast(calloc(Int(numberOfBytesRead), Int(dataFormat.mBitsPerChannel)), to: UnsafeMutablePointer<UInt16>.self)
-
-        defer {
-            buffer.deallocate()
-            descriptions.deallocate()
+            return player
+        } catch {
+            Log.error("Unable to extract AKAudioFile - \(error)")
         }
 
-        AudioFileReadPacketData(fileId, false, &numberOfBytesRead, descriptions, startPacket, &numberOfPacketsToRead, buffer)
-
-        let node = AudioSourceNode(buffer: buffer, size: numberOfPacketsToRead, format: dataFormat)
-
-        return node
+        return nil
     }
 
     deinit {

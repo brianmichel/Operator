@@ -24,7 +24,7 @@ final class DrumSamplesGenerator {
             let samples = header.markers.map { (marker) -> DrumSample in
                 DrumSample(length: marker.end - marker.start,
                            playMode: .loop,
-                           audioNode: file.createAudioSourceNode(startTime: marker.start, endTime: marker.end))
+                           audioPlayer: file.createAudioPlayerForSlice(at: marker.start, to: marker.end))
             }
 
             return samples

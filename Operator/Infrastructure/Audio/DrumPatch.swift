@@ -6,6 +6,7 @@
 //  Copyright © 2020 Brian Michel. All rights reserved.
 //
 
+import AudioKit
 import AVFoundation
 import Foundation
 
@@ -37,7 +38,7 @@ enum SamplePlayMode: HeaderPackable {
 struct DrumSample {
     let length: Double
     let playMode: SamplePlayMode
-    let audioNode: AudioSourceNode
+    let audioPlayer: AKAudioPlayer?
 }
 
 final class DrumPatch {

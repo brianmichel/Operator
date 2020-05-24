@@ -7,4 +7,5 @@ target "Operator" do
   pod 'SwiftLint'
   pod 'SwiftFormat/CLI', '~> 0.40.9'
   pod 'ZIPFoundation', '~> 0.9'
+  pod 'AudioKit', '~> 4.9.5'
 end
