@@ -16,7 +16,6 @@ struct TouchDownViewModifier: ViewModifier {
     func body(content: Content) -> some View {
         let drag = DragGesture(minimumDistance: 0).updating($touchDown) { _, touchDown, _ in
             if !self.touchDown {
-                // About to set touchDown to true, fire the actin
                 self.action?()
                 touchDown = true
             }

@@ -1,5 +1,5 @@
 PODS:
-  - AudioKit/Core (4.9.5)
+  - AudioKit/Core (5.0.b1)
   - CocoaLumberjack/Core (3.6.1)
   - CocoaLumberjack/Swift (3.6.1):
     - CocoaLumberjack/Core
@@ -8,27 +8,28 @@ PODS:
   - ZIPFoundation (0.9.11)
 
 DEPENDENCIES:
-  - AudioKit/Core (~> 4.9.5)
+  - AudioKit/Core (= 5.0.b1)
   - CocoaLumberjack/Swift
   - SwiftFormat/CLI (~> 0.40.9)
   - SwiftLint
   - ZIPFoundation (~> 0.9)
 
 SPEC REPOS:
-  trunk:
+  https://github.com/AudioKit/Specs.git:
     - AudioKit
+  trunk:
     - CocoaLumberjack
     - SwiftFormat
     - SwiftLint
     - ZIPFoundation
 
 SPEC CHECKSUMS:
-  AudioKit: ccf4e39c89ed6e5cbbce5fef58d819db39446437
+  AudioKit: facfb53497e242e43fc3782617e370e773fa6b6d
   CocoaLumberjack: b17ae15142558d08bbacf69775fa10c4abbebcc9
   SwiftFormat: 21c9c3c748d5fcece493d8610eee23df15393458
   SwiftLint: 22ccbbe3b8008684be5955693bab135e0ed6a447
   ZIPFoundation: b1f0de4eed33e74a676f76e12559ab6b75990197
 
-PODFILE CHECKSUM: 06341a9ba3383cdfda168caf4c8aaff0a0817e49
+PODFILE CHECKSUM: 8bd80bc1784f8d64281497b09d77059eec3803af
 
-COCOAPODS: 1.9.1
+COCOAPODS: 1.9.2

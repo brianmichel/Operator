@@ -31,8 +31,8 @@ final class DrumUtilityViewModel: ObservableObject {
 
     init() {
         do {
-            AudioKit.output = audioMixer
-            try AudioKit.start()
+            AKManager.output = audioMixer
+            try AKManager.start()
         } catch {
             Log.error("Unable to start AudioKit - \(error)")
         }
@@ -99,7 +99,7 @@ final class DrumUtilityViewModel: ObservableObject {
 
     deinit {
         do {
-            try AudioKit.stop()
+            try AKManager.stop()
         } catch {
             Log.error("Unable to stop AudioKit - \(error)")
         }
