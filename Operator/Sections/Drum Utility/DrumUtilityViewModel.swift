@@ -14,18 +14,19 @@ import Foundation
 final class DrumUtilityWaveViewModel: ObservableObject {
     @Published var markers = [SampleMarker]()
     @Published var showRelativeSlicing = false
-}
 
-struct SampleMarker: Identifiable {
-    var id = UUID()
-    let start: Double
-    let end: Double
-}
-
-final class DrumUtilityViewModel: ObservableObject {
-    @Published private(set) var selectedAudioFile: AudioFile?
-    private var samples: [DrumSample]?
-    @Published private(set) var waveViewModel = DrumUtilityWaveViewModel()
+    var samples = [DrumSample]() {
+        willSet {
+            samples.forEach { $0.audioPlayer?.detach() }
+        }
+        didSet {
+            samples.forEach { sample in
+                if let player = sample.audioPlayer {
+                    player >>> audioMixer
+                }
+            }
+        }
+    }
 
     private var audioMixer = AKMixer()
 
@@ -36,20 +37,56 @@ final class DrumUtilityViewModel: ObservableObject {
         } catch {
             Log.error("Unable to start AudioKit - \(error)")
         }
+    }
+
+    func playSample(at index: Int) {
+        let sample = samples[index]
+
+        if let audioPlayer = sample.audioPlayer {
+            audioPlayer.play(from: 0)
+        }
+    }
+
+    func stopSample(at index: Int) {
+        let sample = samples[index]
+
+        if sample.playMode == .whileHeld,
+            let player = sample.audioPlayer {
+            player.pause()
+        }
+    }
+
+    deinit {
+        do {
+            try AKManager.stop()
+        } catch {
+            Log.error("Unable to stop AudioKit - \(error)")
+        }
+    }
+}
+
+struct SampleMarker: Identifiable {
+    var id = UUID()
+    let start: Double
+    let end: Double
+}
+
+final class DrumUtilityViewModel: ObservableObject {
+    @Published private(set) var selectedAudioFile: AudioFile?
+    @Published private(set) var waveViewModel = DrumUtilityWaveViewModel()
+
+    init() {
         attemptToLoad(audioFile: Bundle.main.url(forResource: "sample-adjusted", withExtension: ".aif")!)
     }
 
     func didPressKey(action: KeyPress) {
         Log.debug("Did press \(action.direction) in section: \(action.section) at key \(action.key)")
-
-        if let drumSamples = samples {
-            switch action.direction {
-            case .down:
-                // TODO: un-hardcode on touch up to play the first sample
-                playSample(sample: drumSamples[action.key])
-            case .up:
-                stopSample(sample: drumSamples[action.key])
-            }
+        switch action.direction {
+        case .down:
+            // TODO: un-hardcode on touch up to play the first sample
+            waveViewModel.playSample(at: action.key)
+        case .up:
+            waveViewModel.stopSample(at: action.key)
         }
     }
 
@@ -72,36 +109,10 @@ final class DrumUtilityViewModel: ObservableObject {
         }
 
         waveViewModel.markers = relativeStartMarkers
-        let generator = DrumSamplesGenerator(file: file)
-        samples = generator.generate()
 
-        samples?.forEach { sample in
-            if let player = sample.audioPlayer {
-                player >>> audioMixer
-            }
-        }
+        let generator = DrumSamplesGenerator(file: file)
+        waveViewModel.samples = generator.generate()
 
         selectedAudioFile = file
-    }
-
-    private func playSample(sample: DrumSample) {
-        if let audioPlayer = sample.audioPlayer {
-            audioPlayer.play(from: 0)
-        }
-    }
-
-    private func stopSample(sample: DrumSample) {
-        if sample.playMode == .whileHeld,
-            let player = sample.audioPlayer {
-            player.pause()
-        }
-    }
-
-    deinit {
-        do {
-            try AKManager.stop()
-        } catch {
-            Log.error("Unable to stop AudioKit - \(error)")
-        }
     }
 }

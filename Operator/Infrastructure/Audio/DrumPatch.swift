@@ -39,6 +39,7 @@ struct DrumSample {
     let length: Double
     let playMode: SamplePlayMode
     let audioPlayer: AKAudioPlayer?
+    let marker: MarkerPair
 }
 
 final class DrumPatch {
