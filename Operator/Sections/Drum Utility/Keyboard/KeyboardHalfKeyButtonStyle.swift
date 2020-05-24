@@ -9,18 +9,17 @@
 import SwiftUI
 
 struct TouchDownViewModifier: ViewModifier {
-    @State private var touchDown = false
+    @GestureState private var touchDown = false
 
     var action: (() -> Void)?
 
     func body(content: Content) -> some View {
-        let drag = DragGesture(minimumDistance: 0).onChanged { _ in
+        let drag = DragGesture(minimumDistance: 0).updating($touchDown) { _, touchDown, _ in
             if !self.touchDown {
-                self.touchDown = true
+                // About to set touchDown to true, fire the actin
                 self.action?()
+                touchDown = true
             }
-        }.onEnded { _ in
-            self.touchDown = false
         }
 
         return content.simultaneousGesture(drag)
