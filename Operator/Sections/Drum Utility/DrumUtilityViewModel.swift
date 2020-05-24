@@ -38,6 +38,7 @@ final class DrumUtilityViewModel: ObservableObject {
         if let drumSamples = samples {
             switch action.direction {
             case .up:
+                // TODO: un-hardcode on touch up to play the first sample
                 connectAndPlay(sample: drumSamples[0])
             case .down:
                 disconnectAndStop(sample: drumSamples[0])
@@ -71,13 +72,11 @@ final class DrumUtilityViewModel: ObservableObject {
         selectedAudioFile = file
     }
 
-    private func createAudioEngine(from file: AudioFile) -> AVAudioEngine {
+    private func createAudioEngine(from _: AudioFile) -> AVAudioEngine {
         let engine = AVAudioEngine()
         let mainMixer = engine.mainMixerNode
         let output = engine.outputNode
 
-        var streamDescription = file.dataFormat
-        let inputFormat = AVAudioFormat(streamDescription: &streamDescription)
         let outputFormat = output.inputFormat(forBus: 0)
 
         engine.connect(mainMixer, to: output, format: outputFormat)
@@ -86,8 +85,6 @@ final class DrumUtilityViewModel: ObservableObject {
     }
 
     private func connectAndPlay(sample: DrumSample) {
-        let inputFormat = sample.audioNode.node!.inputFormat(forBus: 0)
-
         let mainMixer = engine.mainMixerNode
         let outputNode = engine.outputNode
         let sourceNode = sample.audioNode.node!
@@ -105,11 +102,5 @@ final class DrumUtilityViewModel: ObservableObject {
         }
     }
 
-    private func disconnectAndStop(sample _: DrumSample) {
-//        engine.stop()
-//        if engine.outputNode. {
-//            <#code#>
-//        }
-//        engine.disconnectNodeInput(sample.audioNode, bus: 0)
-    }
+    private func disconnectAndStop(sample _: DrumSample) {}
 }
