@@ -43,7 +43,8 @@ struct DrumUtilityWaveView: View {
 
     private func width(for marker: SampleMarker, width: CGFloat) -> CGFloat {
         if viewModel.showRelativeSlicing {
-            return max(width * CGFloat(marker.end), 30)
+            let duration = marker.end - marker.start
+            return (CGFloat(duration) * width) + (width / 4)
         }
 
         return width / Constants.fixedSamplesToShow

@@ -8,11 +8,17 @@
 
 import SwiftUI
 
+struct RawKeyPress {
+    let section: Int
+    let key: Int
+    let direction: KeyPressDirection
+}
+
 struct KeyboardSectionView: View {
     let section: Int
     let configuration: KeyLayoutConfiguration
 
-    var action: ((KeyPress) -> Void)?
+    var action: ((RawKeyPress) -> Void)?
 
     var body: some View {
         GeometryReader { reader in
@@ -20,7 +26,7 @@ struct KeyboardSectionView: View {
                 HStack(spacing: 2) {
                     ForEach(0 ..< self.configuration.halfKeys) { index in
                         Button(action: {
-                            self.action?(KeyPress(
+                            self.action?(RawKeyPress(
                                 section: self.section,
                                 key: self.halfKeyAdjustedIndex(for: index),
                                 direction: .up
@@ -31,9 +37,9 @@ struct KeyboardSectionView: View {
                         }).buttonStyle(KeyboardHalfKeyButtonStyle(position: self.position(for: index,
                                                                                           in: self.configuration.halfKeys)))
                             .modifier(TouchDownViewModifier(action: {
-                                self.action?(KeyPress(section: self.section,
-                                                      key: self.halfKeyAdjustedIndex(for: index),
-                                                      direction: .down))
+                                self.action?(RawKeyPress(section: self.section,
+                                                         key: self.halfKeyAdjustedIndex(for: index),
+                                                         direction: .down))
                                 Haptics().emit(style: .soft)
                             }))
                     }
@@ -41,7 +47,7 @@ struct KeyboardSectionView: View {
                 HStack(spacing: 2) {
                     ForEach(0 ..< self.configuration.wholeKeys) { index in
                         Button(action: {
-                            self.action?(KeyPress(
+                            self.action?(RawKeyPress(
                                 section: self.section,
                                 key: self.wholeKeyAdjustedIndex(for: index),
                                 direction: .up
@@ -50,9 +56,9 @@ struct KeyboardSectionView: View {
                             Text("").frame(width: reader.size.width / CGFloat(self.configuration.wholeKeys),
                                            height: 200)
                         }).buttonStyle(KeyboardWholeKeyButtonStyle()).modifier(TouchDownViewModifier(action: {
-                            self.action?(KeyPress(section: self.section,
-                                                  key: self.wholeKeyAdjustedIndex(for: index),
-                                                  direction: .down))
+                            self.action?(RawKeyPress(section: self.section,
+                                                     key: self.wholeKeyAdjustedIndex(for: index),
+                                                     direction: .down))
                             Haptics().emit(style: .soft)
                         }))
                     }

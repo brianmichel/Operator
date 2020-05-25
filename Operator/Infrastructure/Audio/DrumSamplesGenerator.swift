@@ -10,6 +10,10 @@ import AudioToolbox
 import Foundation
 
 final class DrumSamplesGenerator {
+    private enum Constants {
+        static let defaultSampleCount = 24
+    }
+
     let file: AudioFile
 
     init(file: AudioFile) {
@@ -31,8 +35,20 @@ final class DrumSamplesGenerator {
             return samples
         } else {
             // No OP-1 Header, we should slice it automatically.
-        }
+            let duration = file.duration
+            let sampleDuration = Double(duration / Float64(Constants.defaultSampleCount))
 
-        return []
+            let samples = (0 ..< Constants.defaultSampleCount).map { (slice) -> DrumSample in
+                let start = Double(slice) * sampleDuration
+                let end = start + sampleDuration
+                let pair: MarkerPair = (start: start, end: end)
+                return DrumSample(length: pair.end - pair.start,
+                                  playMode: .oneShot,
+                                  audioPlayer: file.createAudioPlayerForSlice(at: start, to: end),
+                                  marker: pair)
+            }
+
+            return samples
+        }
     }
 }

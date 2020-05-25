@@ -39,6 +39,11 @@ final class DrumUtilityWaveViewModel: ObservableObject {
         }
     }
 
+    func reset() {
+        showSamples = false
+        markers = []
+    }
+
     func playSample(at index: Int) {
         let sample = samples[index]
 

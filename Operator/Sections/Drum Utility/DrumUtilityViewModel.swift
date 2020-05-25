@@ -24,6 +24,8 @@ final class DrumUtilityViewModel: ObservableObject {
 
     private var storage = Set<AnyCancellable>()
 
+    private let workQueue = DispatchQueue(label: "me.foureyes.Operator.drum-utility-work-queue")
+
     init() {
         sampleFilePicker.$selectedURLs.map { (urls) -> URL? in
             urls.first
@@ -34,45 +36,54 @@ final class DrumUtilityViewModel: ObservableObject {
         }.store(in: &storage)
     }
 
-    func didPressKey(action: KeyPress) {
-        Log.debug("Did press \(action.direction) in section: \(action.section) at key \(action.key)")
+    func reset() {
+        selectedAudioFile = nil
+        waveViewModel.reset()
+    }
+
+    func didPressKey(action: MappedKeyPress) {
         switch action.direction {
         case .down:
             // TODO: un-hardcode on touch up to play the first sample
-            waveViewModel.playSample(at: action.key)
+            waveViewModel.playSample(at: action.mappedKeyIndex)
         case .up:
-            waveViewModel.stopSample(at: action.key)
+            waveViewModel.stopSample(at: action.mappedKeyIndex)
         }
     }
 
     func attemptToLoad(audioFile url: URL) {
-        guard url.startAccessingSecurityScopedResource(),
+        #if targetEnvironment(macCatalyst)
+            let canAccessFile = true
+        #else
+            let canAccessFile = url.startAccessingSecurityScopedResource()
+        #endif
+        guard canAccessFile,
             let file = AudioFile(url: url),
-            let rawMetadata = file.userData,
-            let metadata = DrumHeaderMetadata(rawHeader: rawMetadata),
             file.duration > 0 else {
             Log.error("Unable to open audio file at URL - \(url)")
             return
         }
 
-        defer {
-            url.stopAccessingSecurityScopedResource()
-        }
+        workQueue.async { [weak self] in
+            #if !targetEnvironment(macCatalyst)
+                defer {
+                    url.stopAccessingSecurityScopedResource()
+                }
+            #endif
+            let duration = Double(file.duration)
+            let generator = DrumSamplesGenerator(file: file)
+            let samples = generator.generate()
 
-        let duration = Double(file.duration)
-        let relativeStartMarkers = metadata.markers.map { (pair) -> SampleMarker in
-            if pair.start == 0 {
-                return SampleMarker(start: 0, end: pair.end / duration)
+            let relativeStartMarkers = samples.map { (sample) -> SampleMarker in
+                SampleMarker(start: sample.marker.start / duration, end: sample.marker.end / duration)
             }
 
-            return SampleMarker(start: pair.start / duration, end: pair.end / duration)
+            // Hop back on the main thread to do setting
+            DispatchQueue.main.async {
+                self?.waveViewModel.samples = samples
+                self?.waveViewModel.markers = relativeStartMarkers
+                self?.selectedAudioFile = file
+            }
         }
-
-        waveViewModel.markers = relativeStartMarkers
-
-        let generator = DrumSamplesGenerator(file: file)
-        waveViewModel.samples = generator.generate()
-
-        selectedAudioFile = file
     }
 }
