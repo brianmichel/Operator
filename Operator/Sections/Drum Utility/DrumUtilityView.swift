@@ -21,12 +21,14 @@ struct DrumUtilityView: View {
                     self.viewModel.didPressKey(action: action)
                 }.frame(height: 320)
             } else {
-                DrumUtilityLoadView {
+                DrumUtilityLoadSampleView(tappedButton: {
                     self.showFilePicker.toggle()
                     #if targetEnvironment(macCatalyst)
                         self.showMacDialog(for: self.viewModel.sampleFilePicker)
                     #endif
-                }.padding()
+                }, droppedFile: { url in
+                    self.viewModel.attemptToLoad(audioFile: url)
+                }).padding()
             }
         }.navigationBarTitle("Drum Utility").sheet(isPresented: $showFilePicker, content: {
             #if os(iOS)

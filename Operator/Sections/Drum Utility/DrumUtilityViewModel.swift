@@ -20,7 +20,7 @@ final class DrumUtilityViewModel: ObservableObject {
     @Published private(set) var selectedAudioFile: AudioFile?
     @Published private(set) var waveViewModel = DrumUtilityWaveViewModel()
 
-    let sampleFilePicker = DocumentPicker(allowedDocumentTypes: ["public.aiff-audio", "public.aifc-audio"])
+    let sampleFilePicker = DocumentPicker(allowedDocumentTypes: ["public.aifc-audio"])
 
     private var storage = Set<AnyCancellable>()
 
@@ -45,13 +45,18 @@ final class DrumUtilityViewModel: ObservableObject {
         }
     }
 
-    private func attemptToLoad(audioFile url: URL) {
-        guard let file = AudioFile(url: url),
+    func attemptToLoad(audioFile url: URL) {
+        guard url.startAccessingSecurityScopedResource(),
+            let file = AudioFile(url: url),
             let rawMetadata = file.userData,
             let metadata = DrumHeaderMetadata(rawHeader: rawMetadata),
             file.duration > 0 else {
             Log.error("Unable to open audio file at URL - \(url)")
             return
+        }
+
+        defer {
+            url.stopAccessingSecurityScopedResource()
         }
 
         let duration = Double(file.duration)
