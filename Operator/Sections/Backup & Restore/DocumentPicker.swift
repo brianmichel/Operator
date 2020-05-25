@@ -11,17 +11,22 @@ import UIKit
 
 final class DocumentPicker: NSObject, UIViewControllerRepresentable {
     @Published var selectedURLs = [URL]()
+    let allowedDocumentTypes: [String]
 
     typealias UIViewControllerType = UIDocumentPickerViewController
 
     lazy var viewController: UIDocumentPickerViewController = {
-        let viewController = UIDocumentPickerViewController(documentTypes: ["public.folder"],
+        let viewController = UIDocumentPickerViewController(documentTypes: self.allowedDocumentTypes,
                                                             in: .open)
         viewController.allowsMultipleSelection = false
         viewController.shouldShowFileExtensions = true
         viewController.delegate = self
         return viewController
     }()
+
+    init(allowedDocumentTypes: [String]) {
+        self.allowedDocumentTypes = allowedDocumentTypes
+    }
 
     func makeUIViewController(context _: UIViewControllerRepresentableContext<DocumentPicker>) -> UIDocumentPickerViewController {
         viewController.delegate = self

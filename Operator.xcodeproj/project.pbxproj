@@ -37,6 +37,8 @@
 		72A22CDD247058A700978DE6 /* Compression_Algorithm+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A22CDC247058A700978DE6 /* Compression_Algorithm+Extensions.swift */; };
 		72A9BEBD24756D8D00F34C43 /* FourCharCode+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A9BEBC24756D8D00F34C43 /* FourCharCode+Extensions.swift */; };
 		72B7135D247B369D0048E186 /* sample-modified.aif in Resources */ = {isa = PBXBuildFile; fileRef = 72B7135C247B369D0048E186 /* sample-modified.aif */; };
+		72B7135F247C3B3A0048E186 /* DrumUtilityWaveViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B7135E247C3B3A0048E186 /* DrumUtilityWaveViewModel.swift */; };
+		72B71363247C3D340048E186 /* DrumUtilityLoadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B71362247C3D340048E186 /* DrumUtilityLoadView.swift */; };
 		72B75561247174D100FA8B3B /* BulletedVStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B75560247174D100FA8B3B /* BulletedVStack.swift */; };
 		72B7556324717EAE00FA8B3B /* CircleBullet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B7556224717EAE00FA8B3B /* CircleBullet.swift */; };
 		72B75566247195EC00FA8B3B /* KnobsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B75565247195EC00FA8B3B /* KnobsView.swift */; };
@@ -109,6 +111,8 @@
 		72A22CDC247058A700978DE6 /* Compression_Algorithm+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Compression_Algorithm+Extensions.swift"; sourceTree = "<group>"; };
 		72A9BEBC24756D8D00F34C43 /* FourCharCode+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FourCharCode+Extensions.swift"; sourceTree = "<group>"; };
 		72B7135C247B369D0048E186 /* sample-modified.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sample-modified.aif"; sourceTree = "<group>"; };
+		72B7135E247C3B3A0048E186 /* DrumUtilityWaveViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrumUtilityWaveViewModel.swift; sourceTree = "<group>"; };
+		72B71362247C3D340048E186 /* DrumUtilityLoadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrumUtilityLoadView.swift; sourceTree = "<group>"; };
 		72B75560247174D100FA8B3B /* BulletedVStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletedVStack.swift; sourceTree = "<group>"; };
 		72B7556224717EAE00FA8B3B /* CircleBullet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleBullet.swift; sourceTree = "<group>"; };
 		72B75565247195EC00FA8B3B /* KnobsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnobsView.swift; sourceTree = "<group>"; };
@@ -369,6 +373,8 @@
 				72CBCD6D2471CEE0003D0476 /* DrumUtilityView.swift */,
 				7203EF5824720B150015C7F3 /* DrumUtilityViewModel.swift */,
 				723A76972472216600FF17E2 /* DrumUtilityWaveView.swift */,
+				72B7135E247C3B3A0048E186 /* DrumUtilityWaveViewModel.swift */,
+				72B71362247C3D340048E186 /* DrumUtilityLoadView.swift */,
 			);
 			path = "Drum Utility";
 			sourceTree = "<group>";
@@ -635,8 +641,10 @@
 				726A21F92470260A00DBAB87 /* DeviceLocator.swift in Sources */,
 				72CBCD632471B416003D0476 /* KnobView.swift in Sources */,
 				7203EF5B24720C120015C7F3 /* RawDrumHeaderMetadata.swift in Sources */,
+				72B71363247C3D340048E186 /* DrumUtilityLoadView.swift in Sources */,
 				72CBCD702471D2B2003D0476 /* KeyboardView.swift in Sources */,
 				72B75566247195EC00FA8B3B /* KnobsView.swift in Sources */,
+				72B7135F247C3B3A0048E186 /* DrumUtilityWaveViewModel.swift in Sources */,
 				7238A17A24797FC0001E9C8E /* DrumPatch.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

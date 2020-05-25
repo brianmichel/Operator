@@ -26,8 +26,8 @@ final class BackupViewModel: ObservableObject {
     @Published var backupCompleted = false
     var destinationURL: URL?
 
-    let inputPicker = DocumentPicker()
-    let destinationPicker = DocumentPicker()
+    let inputPicker = DocumentPicker(allowedDocumentTypes: ["public.folder"])
+    let destinationPicker = DocumentPicker(allowedDocumentTypes: ["public.folder"])
 
     private var storage = Set<AnyCancellable>()
 
