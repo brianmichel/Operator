@@ -80,7 +80,7 @@ class AudioFileTests: XCTestCase {
         let header = DrumHeaderMetadata(rawHeader: file.userData!)!
         let firstMarker = header.markers.first!
 
-        let avAudioFile = file.createAudioSourceNode(startTime: firstMarker.start, endTime: firstMarker.end)
+        let avAudioFile = file.createAudioPlayerForSlice(at: firstMarker.start, to: firstMarker.end)
 
         XCTAssertNotNil(avAudioFile, "AVAudioFile should not be nil.")
     }
